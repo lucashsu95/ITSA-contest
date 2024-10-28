@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>圖片展示系統</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css" integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg==" crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous"></script>
+    <style>
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 300ms, box-shadow 300ms;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+        }
+
+        img:hover {
+            transform: scale(1.15);
+            box-shadow: none;
+        }
+
+        section>button.active {
+            background: #1db0a8;
+            color: #fff;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="d-flex gap-3 justify-content-center my-4">
+            <button class="px-2 py-1 px-lg-3 py-lg-2 border rounded-pill fw-bold active">
+                全部圖片
+            </button>
+            <button class="px-2 py-1 px-lg-3 py-lg-2 border rounded-pill fw-bold">
+                自然風景圖
+            </button>
+            <button class="px-2 py-1 px-lg-3 py-lg-2 border rounded-pill fw-bold">
+                城市風景圖
+            </button>
+        </section>
+        <section class="container">
+            <article class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 cards"></article>
+        </section>
+    </main>
+
+    <script>
+        $(document).ready(() => {
+            const types = {
+                0: null,
+                1: [2, 3, 4, 5, 8],
+                2: [1, 6, 7],
+            };
+
+            function render(index = 0) {
+                const type = types[index];
+                for (let i = 1; i < 9; i++) {
+                    if (type === null || (type && type.includes(i))) {
+                        $(".cards").append(`
+                    <div class="col">
+                        <img src="./images/img (${i}).jpg" alt="" />
+                    </div>
+                `);
+                    }
+                }
+            }
+            render();
+
+            $("button").click(function () {
+                $("button.active").removeClass("active");
+                $(this).addClass("active");
+                const index = $(this).index();
+                $(".cards").empty();
+                render(index);
+            });
+        });
+    </script>
+</body>
+
+</html>

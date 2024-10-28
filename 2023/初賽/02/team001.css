@@ -1,0 +1,21 @@
+* {
+    box-sizing: border-box;
+    font-family: 微軟正黑體;
+}
+
+body {
+    display: grid;
+    place-items: center;
+    min-height: 100vh;
+}
+
+section {
+    display: grid;
+    place-items: center;
+}
+
+.time {
+    font-size: 52px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
