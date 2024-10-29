@@ -1,0 +1,27 @@
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.calendar {
+  width: 80%;
+  border: 5px solid blue;
+}
+
+.left-month,.right-month{
+    cursor: pointer;
+}
+
+.grid-7 {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  justify-items: center;
+}
+
+#days > div{
+    cursor: pointer;
+}
+
+#days > div.active{
+    background: #aaa;
+}

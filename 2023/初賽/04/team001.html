@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日期選擇元件</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+        integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+        crossorigin="anonymous" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js"
+        integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=="
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="./team001.css">
+</head>
+
+<body>
+    所選日期：<span id="date"></span>
+    <div class="calendar py-3">
+        <div class="text-center py-2 d-flex justify-content-around">
+            <div class="left-month">&lt;</div>
+            <div class=" fw-bold" id="month-year"></div>
+            <div class="right-month">&gt;</div>
+        </div>
+        <div class="grid-7 text-center fw-bold py-2" id="head">
+
+        </div>
+        <main id="days" class="grid-7">
+
+        </main>
+
+    </div>
+
+    <script>
+        $(document).ready(() => {
+            const head = ['S', 'M', 'T', 'W', 'T', 'F', 'S']
+            const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+            const date = new Date();
+            let year = date.getFullYear();
+            let month = date.getMonth();
+            let day = date.getDate();
+
+            $('#head').append(head.map((item) => {
+                return `<div class="col">${item}</div>`
+            }))
+
+            const currentYear = {
+                year: null,
+                month: null,
+                day: null
+            }
+
+            function render() {
+                let displayMonth = monthNames[month];
+                $('#month-year').text(`${displayMonth} ${year}`)
+                $('#days').empty()
+                const firstDay = new Date(year, month, 1).getDay()
+                const lastDay = new Date(year, month + 1, 0).getDate()
+                for (let i = 0; i < lastDay + firstDay; i++) {
+                    if (i >= firstDay) {
+                        const currentDay = i + 1 - firstDay
+                        $('#days').append(`<div class="py-2" data-date="${currentDay}">${currentDay}</div>`)
+                    } else {
+                        $('#days').append(`<div class="py-2"></div>`)
+                    }
+                }
+                $('#days > div').click(function () {
+                    console.log($(this).data('date')); // TODO
+                })
+                console.log(firstDay)
+            }
+
+            function changeMonth(num) {
+                month += num
+                if (month < 0) {
+                    month = 11
+                    year--
+                } else if (month > 11) {
+                    month = 0
+                    year++
+                }
+                render()
+            }
+            $('.left-month').click(() => {
+                changeMonth(-1)
+            })
+            $('.right-month').click(() => {
+                changeMonth(1)
+            })
+            render()
+        })
+
+    </script>
+</body>
+
+</html>
