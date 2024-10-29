@@ -1,12 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>貨幣匯率轉換計算器</title>
+    <script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js'
+        integrity='sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g=='
+        crossorigin='anonymous'></script>
     <link rel="stylesheet" href="./team001.css">
 </head>
+
 <body>
-    
+    <main>
+        <section>
+            <div class="box">
+                商品描述與照片
+            </div>
+            <p>
+                原始幣別：
+                <select class="origin">
+                    <option value="美幣">美幣</option>
+                    <option value="台幣">台幣</option>
+                    <option value="日元">日元</option>
+                    <option value="英鎊">英鎊</option>
+                    <option value="澳元">澳元</option>
+                </select>
+                </p尸>
+            <p>
+                輸入價格：
+                <input type="text" class="inp" value="1">
+            </p>
+            <button class="change-btn">轉換</button>
+        </section>
+        <section>
+            <p>
+                轉換幣別：
+                <select class="next">
+                    <option value="日元">日元</option>
+                    <option value="美幣">美幣</option>
+                    <option value="台幣">台幣</option>
+                    <option value="英鎊">英鎊</option>
+                    <option value="澳元">澳元</option>
+                </select>
+            </p>
+            <p>
+                對應價格：
+                <input type="text" readonly class="show">
+            </p>
+        </section>
+    </main>
+    <script>
+
+        const types = {
+            '台幣': 1,
+            '美幣': 0.031169,
+            '日元': 4.780521,
+            '英鎊': 0.024008,
+            '澳元': 0.047398,
+        }
+
+        $(document).ready(() => {
+            function render() {
+                const origin = $(".origin").val();
+                const next = $('.next').val();
+                console.log(origin, next);
+
+                const val = types[origin];
+                const inp = $('.inp').val();
+                let nextVal;
+                if (origin == next) {
+                    nextVal = inp
+                } else if (next === '台幣') {
+                    nextVal = inp / types[origin]
+                } else if (origin === '台幣') {
+                    nextVal = inp * types[next]
+                    $('.show').val();
+                } else {
+                    tw = inp / types[origin];
+                    nextVal = tw * types[next];
+                }
+                $('.show').val(Math.round(nextVal * 1000) / 1000);
+            }
+            $(".change-btn").click(render)
+        })
+
+    </script>
 </body>
+
 </html>
