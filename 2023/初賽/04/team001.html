@@ -60,15 +60,16 @@
                 for (let i = 0; i < lastDay + firstDay; i++) {
                     if (i >= firstDay) {
                         const currentDay = i + 1 - firstDay
-                        $('#days').append(`<div class="py-2" data-date="${currentDay}">${currentDay}</div>`)
+                        $('#days').append(`<div class="py-2 w-100 text-center" data-date="${currentDay}">${currentDay}</div>`)
                     } else {
-                        $('#days').append(`<div class="py-2"></div>`)
+                        $('#days').append(`<div class="py-2 w-100 text-center"></div>`)
                     }
                 }
                 $('#days > div').click(function () {
-                    console.log($(this).data('date')); // TODO
+                    $("#date").text(`民國 ${year - 1911} 年 ${month + 1} 月 ${$(this).data('date')} 日`)
+                    $(".active").removeClass('active')
+                    $(`[data-date=${$(this).data('date')}]`).addClass('active')
                 })
-                console.log(firstDay)
             }
 
             function changeMonth(num) {
@@ -82,6 +83,7 @@
                 }
                 render()
             }
+
             $('.left-month').click(() => {
                 changeMonth(-1)
             })
