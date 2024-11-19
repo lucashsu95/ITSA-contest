@@ -3,6 +3,7 @@
 ## 競賽資訊
 
 - [競賽須知](https://www.itsa.org.tw/itsacontest/2024/role.php)
+- [歷屆試題](https://www.itsa.org.tw/itsacontest/2024/history.php)
 
 ## 歷屆試題
 
