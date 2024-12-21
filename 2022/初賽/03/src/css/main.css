@@ -1,0 +1,90 @@
+.container {
+  display: grid;
+  grid-template-columns: 1fr 5fr;
+  margin: 20px;
+  border: 1px solid #bbb;
+  min-height: 100vh;
+  gap: 20px;
+  padding: 20px;
+}
+
+aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+
+  padding-top: 20px;
+  border: 1px solid #bbb;
+}
+
+main {
+  padding: 20px;
+  border: 1px solid #bbb;
+}
+
+main > section {
+  padding: 20px;
+  border: 1px solid #bbb;
+  display: none;
+}
+
+main > section.active {
+  display: block;
+}
+
+#note-list {
+  & > .nav {
+    display: flex;
+    justify-content: space-between;
+    padding-bottom: 10px;
+
+    & > .tag-bar {
+      display: flex;
+      gap: 10px;
+    }
+  }
+}
+
+#add-tag {
+  & > .nav {
+    text-align: center;
+  }
+}
+
+
+
+#add-note {
+  & > .nav {
+    text-align: center;
+  }
+  & > form {
+    & > .add-note-bar {
+      margin: 20px 0;
+      display: flex;
+      justify-content: space-between;
+    }
+    & > .form-body {
+      display: grid;
+      gap: 20px;
+
+      & > div {
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+        column-gap: 20px;
+
+        & textarea,
+        input {
+          width: 100%;
+          margin: 5px 0;
+          padding: 3px;
+        }
+      }
+
+      & > .control {
+        display: flex;
+        justify-content: center;
+      }
+    }
+  }
+}

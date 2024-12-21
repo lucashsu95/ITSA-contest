@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./css/base.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+  <body>
+    <div class="container">
+      <aside>
+        <button class="btn">筆記清單</button>
+        <button class="btn">新增分類</button>
+        <button class="btn">新增筆記</button>
+        <button class="btn">查詢筆記</button>
+      </aside>
+      <main>
+        <section id="note-list">
+          <div class="nav">
+            <h2>筆記清單</h2>
+            <div class="tag-bar">
+              <h2>分類：</h2>
+              <select>
+                <option value="全部">全部</option>
+              </select>
+            </div>
+          </div>
+          <hr />
+          <section class="notes">
+            <div class="note">
+              <h3>花東三日遊</h3>
+              <div>
+                <button class="btn">閱覽</button>
+                <button class="btn">修改</button>
+                <button class="btn btn-danger">刪除</button>
+              </div>
+            </div>
+            <div class="note">
+              <h3>花東三日遊</h3>
+              <div>
+                <button class="btn">閱覽</button>
+                <button class="btn">修改</button>
+                <button class="btn btn-danger">刪除</button>
+              </div>
+            </div>
+          </section>
+        </section>
+        <section id="add-tag">
+          <div class="nav">
+            <h2>新增分類</h2>
+          </div>
+          <form onsubmit="" class="add-tag-form">
+            <div class="add-tag-bar">
+              <label for="tag-name">輸入分類：</label>
+              <input type="text" id="tag-name" required />
+            </div>
+            <div class="control">
+              <button class="btn">確認</button>
+            </div>
+          </form>
+        </section>
+        <section id="add-note">
+          <div class="nav">
+            <h2>新增/修改筆記</h2>
+          </div>
+          <form onsubmit="">
+            <section class="add-note-bar">
+              <div>選擇筆記分類：</div>
+              <div>
+                <select name="" id="">
+                  <option value="">=== 請選擇筆記分類 ===</option>
+                </select>
+              </div>
+              <div class="tags">
+                <div class="tag">美食 <button type="button">X</button></div>
+                <div class="tag">美食1 <button type="button">X</button></div>
+              </div>
+            </section>
+            <section class="form-body">
+              <div>
+                <div>筆記標題：</div>
+                <div><input type="text" placeholder="請輸入筆記標題" /></div>
+              </div>
+              <div>
+                <div>筆記內容：</div>
+                <div>
+                  <textarea
+                    cols="2"
+                    rows="10"
+                    placeholder="請輸入筆記內容"
+                  ></textarea>
+                </div>
+              </div>
+              <div class="control">
+                <button class="btn">確認</button>
+              </div>
+            </section>
+          </form>
+        </section>
+        <section id="search-note" class="active">
+          <div class="nav">
+            <h2>查詢筆記</h2>
+          </div>
+          <form onsubmit="" class="search-note-form">
+            <div class="add-tag-bar">
+              <label for="search-note-input">輸入筆記標題：</label>
+              <input
+                type="text"
+                id="search-note-input"
+                placeholder="八卦山"
+                required
+              />
+            </div>
+            <div class="control">
+              <button class="btn">查詢</button>
+            </div>
+          </form>
+          <section class="notes">
+            <div class="note">
+              <h3>花東三日遊</h3>
+              <div>
+                <button class="btn">閱覽</button>
+                <button class="btn">修改</button>
+                <button class="btn btn-danger">刪除</button>
+              </div>
+            </div>
+            <div class="note">
+              <h3>花東三日遊</h3>
+              <div>
+                <button class="btn">閱覽</button>
+                <button class="btn">修改</button>
+                <button class="btn btn-danger">刪除</button>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+    <script src="./js/page.js"></script>
+    <script src="./js/mian.js"></script>
+  </body>
+</html>
