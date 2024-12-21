@@ -9,6 +9,15 @@ a {
   text-decoration: none;
 }
 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-weight: normal;
+}
+
 select {
   padding: 0.4rem 0.8rem;
   border-radius: 4px;
@@ -37,6 +46,12 @@ button {
   color: #fff;
 }
 
+.btn.btn-secondary {
+  background: #6b757e;
+  border: 1px solid #6b757e;
+  color: #fff;
+}
+
 .notes {
   margin-top: 10px;
   display: grid;
@@ -48,28 +63,7 @@ button {
   justify-content: space-between;
   align-items: center;
   padding: 10px;
-  border: 1px solid #bbb;
-}
-
-.add-tag-form,
-.search-note-form {
-  & .add-tag-bar {
-    margin: 20px 0;
-    display: flex;
-    align-items: center;
-    gap: 30px;
-
-    & > label {
-      min-width: max-content;
-    }
-    & > input {
-      width: 100%;
-    }
-  }
-  & .control {
-    display: flex;
-    justify-content: center;
-  }
+  border-bottom: 1px solid #bbb;
 }
 
 .tags {

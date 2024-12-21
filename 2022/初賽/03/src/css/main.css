@@ -1,11 +1,11 @@
 .container {
   display: grid;
   grid-template-columns: 1fr 5fr;
-  margin: 20px;
+  margin: 15px;
   border: 1px solid #bbb;
   min-height: 100vh;
-  gap: 20px;
-  padding: 20px;
+  gap: 15px;
+  padding: 15px;
 }
 
 aside {
@@ -14,17 +14,17 @@ aside {
   align-items: center;
   gap: 10px;
 
-  padding-top: 20px;
+  padding-top: 15px;
   border: 1px solid #bbb;
 }
 
 main {
-  padding: 20px;
+  padding: 15px;
   border: 1px solid #bbb;
 }
 
 main > section {
-  padding: 20px;
+  padding: 15px;
   border: 1px solid #bbb;
   display: none;
 }
@@ -46,45 +46,61 @@ main > section.active {
   }
 }
 
-#add-tag {
+#add-tag,
+#add-note,
+#search-note {
   & > .nav {
     text-align: center;
   }
 }
 
+.add-tag-form,
+.search-note-form {
+  & .bar {
+    margin: 20px 0;
+    display: flex;
+    align-items: center;
+    gap: 30px;
 
-
-#add-note {
-  & > .nav {
-    text-align: center;
-  }
-  & > form {
-    & > .add-note-bar {
-      margin: 20px 0;
-      display: flex;
-      justify-content: space-between;
+    & > label {
+      min-width: max-content;
     }
-    & > .form-body {
+    & > input {
+      width: 100%;
+    }
+  }
+  & .control {
+    display: flex;
+    justify-content: center;
+  }
+}
+
+#add-note > form {
+  & > .add-note-bar {
+    margin: 20px 0;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  & > .form-body {
+    display: grid;
+    gap: 20px;
+
+    & > div {
       display: grid;
-      gap: 20px;
+      grid-template-columns: 1fr 3fr;
+      column-gap: 20px;
 
-      & > div {
-        display: grid;
-        grid-template-columns: 1fr 3fr;
-        column-gap: 20px;
-
-        & textarea,
-        input {
-          width: 100%;
-          margin: 5px 0;
-          padding: 3px;
-        }
+      & :is(textarea, input) {
+        width: 100%;
+        margin: 5px 0;
+        padding: 3px;
       }
+    }
 
-      & > .control {
-        display: flex;
-        justify-content: center;
-      }
+    & > .control {
+      display: flex;
+      justify-content: center;
     }
   }
 }

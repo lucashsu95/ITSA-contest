@@ -16,7 +16,7 @@
         <button class="btn">查詢筆記</button>
       </aside>
       <main>
-        <section id="note-list">
+        <section id="note-list" class="active">
           <div class="nav">
             <h2>筆記清單</h2>
             <div class="tag-bar">
@@ -51,9 +51,14 @@
             <h2>新增分類</h2>
           </div>
           <form onsubmit="" class="add-tag-form">
-            <div class="add-tag-bar">
+            <div class="bar">
               <label for="tag-name">輸入分類：</label>
-              <input type="text" id="tag-name" required />
+              <input
+                type="text"
+                id="tag-name"
+                placeholder="請輸入分類名稱"
+                required
+              />
             </div>
             <div class="control">
               <button class="btn">確認</button>
@@ -98,12 +103,12 @@
             </section>
           </form>
         </section>
-        <section id="search-note" class="active">
+        <section id="search-note">
           <div class="nav">
             <h2>查詢筆記</h2>
           </div>
           <form onsubmit="" class="search-note-form">
-            <div class="add-tag-bar">
+            <div class="bar">
               <label for="search-note-input">輸入筆記標題：</label>
               <input
                 type="text"
@@ -113,7 +118,7 @@
               />
             </div>
             <div class="control">
-              <button class="btn">查詢</button>
+              <button class="btn btn-secondary">查詢</button>
             </div>
           </form>
           <section class="notes">
