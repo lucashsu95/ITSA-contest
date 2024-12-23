@@ -80,6 +80,11 @@ main > section.active {
     margin: 20px 0;
     display: flex;
     justify-content: space-between;
+    & > #selected-tags {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
   }
 
   & > .form-body {

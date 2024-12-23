@@ -21,13 +21,13 @@
             <h2>筆記清單</h2>
             <div class="tag-bar">
               <h2>分類：</h2>
-              <select>
+              <select class="tags-select-bar" onchange="filterNotes(event)">
                 <option value="全部">全部</option>
               </select>
             </div>
           </div>
           <hr />
-          <section class="notes">
+          <section class="notes" id="view-note-list">
             <div class="note">
               <h3>花東三日遊</h3>
               <div>
@@ -50,7 +50,7 @@
           <div class="nav">
             <h2>新增分類</h2>
           </div>
-          <form onsubmit="" class="add-tag-form">
+          <form onsubmit="addTag(event)" class="add-tag-form">
             <div class="bar">
               <label for="tag-name">輸入分類：</label>
               <input
@@ -69,23 +69,27 @@
           <div class="nav">
             <h2>新增/修改筆記</h2>
           </div>
-          <form onsubmit="">
+          <form onsubmit="editNote(event)">
             <section class="add-note-bar">
               <div>選擇筆記分類：</div>
               <div>
-                <select name="" id="">
+                <select name="" id="add-note-tags-select-bar">
                   <option value="">=== 請選擇筆記分類 ===</option>
                 </select>
               </div>
-              <div class="tags">
-                <div class="tag">美食 <button type="button">X</button></div>
-                <div class="tag">美食1 <button type="button">X</button></div>
+              <div id="selected-tags">
               </div>
             </section>
             <section class="form-body">
               <div>
                 <div>筆記標題：</div>
-                <div><input type="text" placeholder="請輸入筆記標題" /></div>
+                <div>
+                  <input
+                    type="text"
+                    placeholder="請輸入筆記標題"
+                    id="note-title"
+                  />
+                </div>
               </div>
               <div>
                 <div>筆記內容：</div>
@@ -93,6 +97,7 @@
                   <textarea
                     cols="2"
                     rows="10"
+                    id="note-content"
                     placeholder="請輸入筆記內容"
                   ></textarea>
                 </div>
@@ -107,7 +112,7 @@
           <div class="nav">
             <h2>查詢筆記</h2>
           </div>
-          <form onsubmit="" class="search-note-form">
+          <form onsubmit="searchNotes(event)" class="search-note-form">
             <div class="bar">
               <label for="search-note-input">輸入筆記標題：</label>
               <input
@@ -121,7 +126,7 @@
               <button class="btn btn-secondary">查詢</button>
             </div>
           </form>
-          <section class="notes">
+          <section class="notes" id="search-note-list">
             <div class="note">
               <h3>花東三日遊</h3>
               <div>
@@ -142,7 +147,6 @@
         </section>
       </main>
     </div>
-    <script src="./js/page.js"></script>
-    <script src="./js/mian.js"></script>
+    <script src="./js/main.js"></script>
   </body>
 </html>
