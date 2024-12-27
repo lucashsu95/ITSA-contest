@@ -117,10 +117,10 @@ renderArticleList();
 const articleTable = document.querySelector("#article .table__body");
 let currentArticleId = null;
 function showArticle(article_id) {
+  const article = articlies.find((article) => article.id === article_id);
   document.querySelector("#article-title").textContent = article.title;
   articleTable.innerHTML = "";
   currentArticleId = article_id;
-  const article = articlies.find((article) => article.id === article_id);
   const articleElement = document.createElement("tr");
   articleElement.innerHTML = `
       <td>${article.postBy}</td>

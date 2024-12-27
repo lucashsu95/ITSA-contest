@@ -6,20 +6,53 @@
 }
 
 body {
-  padding: 50px;
+  padding: 20px;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .table {
   width: 100%;
-  max-width: 800px;
   border-collapse: collapse;
   margin: 20px auto;
+  & th {
+    text-align: left;
+  }
+
+  & :is(th, td) {
+    border: 1px solid #999;
+    padding: 7px;
+  }
+
+  & tfoot {
+    cursor: pointer;
+    & > tr {
+      text-align: center;
+      & > td {
+        padding: 4px 0;
+      }
+    }
+  }
 }
 
-.table th,
-.table td {
-  border: 1px solid #999;
-  padding: 7px;
+td:has(:is(input, textarea)) {
+  padding: 0 !important;
+}
+
+textarea,
+input {
+  width: 100%;
+  border: none;
+  outline: none;
+}
+
+input {
+  height: 37px;
+}
+
+textarea {
+  height: 55px;
 }
 
 button {
@@ -29,5 +62,6 @@ button {
   border: none;
   border-radius: 5px;
   cursor: pointer;
+  font-size: 16px;
   margin: 3px 0;
 }
