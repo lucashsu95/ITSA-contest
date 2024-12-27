@@ -1,0 +1,33 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 微軟正黑體;
+}
+
+body {
+  padding: 50px;
+}
+
+.table {
+  width: 100%;
+  max-width: 800px;
+  border-collapse: collapse;
+  margin: 20px auto;
+}
+
+.table th,
+.table td {
+  border: 1px solid #999;
+  padding: 7px;
+}
+
+button {
+  padding: 5px 10px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 3px 0;
+}

@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./main.css" />
+  </head>
+
+  <body>
+    <main>
+      <section id="article-list-page">
+        <h1>文章列表</h1>
+        <button id="add-article">發表文章</button>
+        <table class="table" id="article-table">
+          <thead>
+            <tr>
+              <th>文章標題</th>
+              <th>發表人</th>
+            </tr>
+          </thead>
+          <tbody class="table__body"></tbody>
+        </table>
+      </section>
+
+      <section id="add-article-page">
+        <h1>發表文章</h1>
+        <form id="add-article-form">
+          <table class="table">
+            <tr>
+              <td>文章標題</td>
+              <td>
+                <input type="text" id="add-article-title" />
+              </td>
+            </tr>
+            <tr>
+              <td>文章內容</td>
+              <td>
+                <textarea id="add-article-content"></textarea>
+              </td>
+            </tr>
+            <tr>
+              <td>發表人</td>
+              <td>
+                <input type="text" id="add-article-postBy" />
+              </td>
+            </tr>
+            <tr>
+              <td>代碼</td>
+              <td>
+                <input type="text" id="add-article-pass" />
+              </td>
+            </tr>
+          </table>
+          <button>送出</button>
+        </form>
+      </section>
+
+      <section id="article-page">
+        <button onclick="changePage('articleListPage')">反回文章列表</button>
+        <table class="table" id="article">
+          <thead>
+            <tr>
+              <th>發表人</th>
+              <th>文章標題：<span id="article-title"></span></th>
+            </tr>
+          </thead>
+          <tbody class="table__body"></tbody>
+          <tfoot style="cursor: pointer">
+            <tr style="text-align: center" id="reply-article">
+              <td colspan="2">點我回覆文章</td>
+            </tr>
+            <tr style="text-align: center" id="edit-article">
+              <td colspan="2">點我編輯原文</td>
+            </tr>
+          </tfoot>
+        </table>
+      </section>
+
+      <section id="reply-article-page">
+        <button onclick="changePage('articlePage')">反回文章</button>
+        <form id="reply-article-form">
+          <table class="table">
+            <tr>
+              <td colspan="2">
+                回覆文章：<span id="reply-article-title"></span>
+              </td>
+            </tr>
+            <tr>
+              <td>顯示名稱</td>
+              <td><input type="text" id="reply-postBy-input" /></td>
+            </tr>
+            <tr>
+              <td>留言內容</td>
+              <td><input type="text" id="reply-content-input" /></td>
+            </tr>
+          </table>
+          <button>送出</button>
+        </form>
+      </section>
+    </main>
+
+    <script src="main.js"></script>
+  </body>
+</html>
