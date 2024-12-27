@@ -20,13 +20,13 @@ class Replay {
   }
 }
 
+// seeder
 const articlies = [
   new Article("Title 1", "Content 1", "疑惑的人", "1234"),
   new Article("Title 2", "Content 2", "帥氣的人", "234"),
   new Article("Title 3", "Content 3", "害羞的人", "345"),
 ];
 
-// seeder
 articlies[0].replays.push(new Replay("路人甲", "回覆內容1"));
 articlies[0].replays.push(new Replay("亂入的人", "回覆內容2"));
 articlies[1].replays.push(new Replay("帥哥1號", "差我一點"));
@@ -65,21 +65,34 @@ changePage("articleListPage");
 
 // <------------------- add article ------------------------>
 
+const title = document.querySelector("#add-article-title");
+const content = document.querySelector("#add-article-content");
+const postBy = document.querySelector("#add-article-postBy");
+const pass = document.querySelector("#add-article-pass");
+
+const addArticleForm = document.querySelector("form#add-article-form");
+const backBtn = document.querySelector("#add-article-page > .back-btn");
+
 document.querySelector("#add-article").addEventListener("click", () => {
   changePage("addArticlePage");
 
-  document
-    .querySelector("#add-article-form")
-    .addEventListener("submit", (e) => {
-      e.preventDefault();
-      const title = document.querySelector("#add-article-title").value;
-      const content = document.querySelector("#add-article-content").value;
-      const postBy = document.querySelector("#add-article-postBy").value;
-      const pass = document.querySelector("#add-article-pass").value;
-      createArticle(title, content, postBy, pass);
-      renderArticleList();
-      changePage("articleListPage");
-    });
+  function onSubmit(e) {
+    e.preventDefault();
+    createArticle(title.value, content.value, postBy.value, pass.value);
+    renderArticleList();
+    changePage("articleListPage");
+
+    addArticleForm.reset();
+    addArticleForm.removeEventListener("submit", onSubmit);
+  }
+
+  backBtn.addEventListener("click", () => {
+    changePage("articleListPage");
+    addArticleForm.reset();
+    addArticleForm.removeEventListener("submit", onSubmit);
+  });
+
+  addArticleForm.addEventListener("submit", onSubmit);
 });
 
 // <------------------- show article list ------------------------>
@@ -104,11 +117,10 @@ renderArticleList();
 const articleTable = document.querySelector("#article .table__body");
 let currentArticleId = null;
 function showArticle(article_id) {
+  document.querySelector("#article-title").textContent = article.title;
   articleTable.innerHTML = "";
   currentArticleId = article_id;
   const article = articlies.find((article) => article.id === article_id);
-  const articleTitleElement = document.querySelector("#article-title");
-  articleTitleElement.textContent = article.title;
   const articleElement = document.createElement("tr");
   articleElement.innerHTML = `
       <td>${article.postBy}</td>
@@ -129,23 +141,22 @@ function showArticle(article_id) {
 }
 
 // <------------------- reply ------------------------>
+const replyForm = document.querySelector("#reply-article-form");
+const articleTitle = document.querySelector("#reply-article-title");
 document.querySelector("#reply-article").addEventListener("click", () => {
   changePage("replyArticlePage");
-  const articleTitle = document.querySelector("#reply-article-title");
-  articleTitle.textContent = articlies.find(
-    (article) => article.id === currentArticleId
-  ).title;
+  const article = articlies.find((article) => article.id === currentArticleId);
+  articleTitle.textContent = article.title;
   changePage("replyArticlePage");
-  document
-    .querySelector("#reply-article-form")
-    .addEventListener("submit", (e) => {
-      e.preventDefault();
-      const postBy = document.querySelector("#reply-postBy-input").value;
-      const content = document.querySelector("#reply-content-input").value;
-      createReplay(postBy, content, currentArticleId);
-      renderArticleList();
-      changePage("articleListPage");
-    });
+});
+
+replyForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  const postBy = document.querySelector("#reply-postBy-input").value;
+  const content = document.querySelector("#reply-content-input").value;
+  createReplay(postBy, content, currentArticleId);
+  renderArticleList();
+  changePage("articleListPage");
 });
 
 // <------------------- edit ------------------------>
@@ -157,25 +168,31 @@ document.querySelector("#edit-article").addEventListener("click", () => {
   }
   changePage("addArticlePage");
 
-  const title = document.querySelector("#add-article-title");
-  const content = document.querySelector("#add-article-content");
-  const postBy = document.querySelector("#add-article-postBy");
-  const pass = document.querySelector("#add-article-pass");
   title.value = article.title;
   content.value = article.content;
   postBy.value = article.postBy;
   pass.value = article.pass;
 
-  document
-    .querySelector("form#add-article-form")
-    .addEventListener("submit", (e) => {
-      e.preventDefault();
+  function onSubmit(e) {
+    e.preventDefault();
 
-      article.title = title.value;
-      article.content = content.value;
-      article.postBy = postBy.value;
-      article.pass = pass.value;
-      renderArticleList();
-      changePage("articleListPage");
-    });
+    article.title = title.value;
+    article.content = content.value;
+    article.postBy = postBy.value;
+    article.pass = pass.value;
+
+    renderArticleList();
+    changePage("articleListPage");
+    currentArticleId = null;
+    addArticleForm.reset();
+    addArticleForm.removeEventListener("submit", onSubmit);
+  }
+
+  backBtn.addEventListener("click", () => {
+    changePage("articleListPage");
+    addArticleForm.reset();
+    addArticleForm.removeEventListener("submit", onSubmit);
+  });
+
+  addArticleForm.addEventListener("submit", onSubmit);
 });
