@@ -31,25 +31,40 @@
             <tr>
               <td>文章標題</td>
               <td>
-                <input type="text" id="add-article-title" />
+                <input
+                  type="text"
+                  id="add-article-title"
+                  placeholder="請輸入文章標題"
+                />
               </td>
             </tr>
             <tr>
               <td>文章內容</td>
               <td>
-                <textarea id="add-article-content"></textarea>
+                <textarea
+                  id="add-article-content"
+                  placeholder="請輸入文章內容"
+                ></textarea>
               </td>
             </tr>
             <tr>
               <td>發表人</td>
               <td>
-                <input type="text" id="add-article-postBy" />
+                <input
+                  type="text"
+                  id="add-article-postBy"
+                  placeholder="請輸入發表人"
+                />
               </td>
             </tr>
             <tr>
               <td>代碼</td>
               <td>
-                <input type="text" id="add-article-pass" />
+                <input
+                  type="text"
+                  id="add-article-pass"
+                  placeholder="請輸入代碼"
+                />
               </td>
             </tr>
           </table>
@@ -67,11 +82,11 @@
             </tr>
           </thead>
           <tbody class="table__body"></tbody>
-          <tfoot style="cursor: pointer">
-            <tr style="text-align: center" id="reply-article">
+          <tfoot>
+            <tr id="reply-article">
               <td colspan="2">點我回覆文章</td>
             </tr>
-            <tr style="text-align: center" id="edit-article">
+            <tr id="edit-article">
               <td colspan="2">點我編輯原文</td>
             </tr>
           </tfoot>
@@ -89,11 +104,23 @@
             </tr>
             <tr>
               <td>顯示名稱</td>
-              <td><input type="text" id="reply-postBy-input" /></td>
+              <td>
+                <input
+                  type="text"
+                  id="reply-postBy-input"
+                  placeholder="請輸入顯示名稱"
+                />
+              </td>
             </tr>
             <tr>
               <td>留言內容</td>
-              <td><input type="text" id="reply-content-input" /></td>
+              <td>
+                <input
+                  type="text"
+                  id="reply-content-input"
+                  placeholder="請輸入留言內容"
+                />
+              </td>
             </tr>
           </table>
           <button>送出</button>
