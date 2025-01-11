@@ -15,7 +15,7 @@
   <?php
   date_default_timezone_set('Asia/Taipei');
   @session_start();
-  $db = new pdo('mysql:host=localhost;dbname=curd', 'root', '');
+  $db = new pdo('mysql:host=db;dbname=curd', 'root', '1234');
   $action = $_GET['action'] ?? 'show';
 
   if ($action == 'add') {
@@ -87,6 +87,7 @@
     </aside>
     <main class="content">
       <div id="content-area">
+
         <?php
         if ($action == 'add_form') {
           ?>
@@ -107,82 +108,76 @@
             </div>
 
             <button type="submit" class="btn btn-primary">新增</button>
-            <?php
+          </form>
+          <?php
         }
         ?>
-          <?php
-          if ($action == 'show') {
-            ?>
-            <h2>商品表</h2>
-            <h3>商品詳細資訊</h3>
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">#</th>
-                  <th scope="col">名稱</th>
-                  <th scope="col">價格</th>
-                  <th scope="col">功能</th>
-                </tr>
-              </thead>
-              <tbody>
-                <?php
-                foreach ($data as $row) {
-                  ?>
-                  <tr>
-                    <th scope="row"><?php echo $row['pro_id']; ?></th>
-                    <td><?php echo $row['pro_name']; ?></td>
-                    <td><?php echo $row['pro_price']; ?></td>
-                    <td>
-                      <a href="?action=update-from&id=<?php echo $row['pro_id']; ?>">編輯</a>
-                      ｜
-                      <a href="?action=delete&id=<?php echo $row['pro_id']; ?>">刪除</a>
-                    </td>
-                  </tr>
-                  <?php
-                }
-                ?>
-              </tbody>
-              <?php
-          }
+        <?php
+        if ($action == 'show') {
           ?>
-            <?php
-            if ($action == 'update-from') {
-              ?>
-              <h2>商品表單</h2>
-              <h3>編輯商品資訊：</h3>
-              <form action="?action=update" method="post">
-                <input type="hidden" name="id" value="<?php echo $data['pro_id']; ?>">
-                <div class="mb-3">
-                  <label for="name" class="form-label">商品名稱</label>
-                  <input type="text" class="form-control" id="name" name="name" value="<?php echo $data['pro_name']; ?>">
-                </div>
-                <div class="mb-3">
-                  <label for="price" class="form-label">商品價格</label>
-                  <input type="text" class="form-control" id="price" name="price"
-                    value="<?php echo $data['pro_price']; ?>">
-                </div>
-                <div class="mb-3">
-                  <label for="details" class="form-label">商品描述</label>
-                  <textarea class="form-control" id="details"
-                    name="details"><?php echo $data['pro_details']; ?></textarea>
-                </div>
-                <button type="submit" class="btn btn-primary">更新</button>
-                <?php
-            }
-            ?>
+          <h2>商品表</h2>
+          <h3>商品詳細資訊</h3>
+          <table class="table">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">名稱</th>
+                <th scope="col">價格</th>
+                <th scope="col">功能</th>
+              </tr>
+            </thead>
+            <tbody>
               <?php
-              if ($action == '') {
+              foreach ($data as $row) {
                 ?>
-
+                <tr>
+                  <th scope="row"><?php echo $row['pro_id']; ?></th>
+                  <td><?php echo $row['pro_name']; ?></td>
+                  <td><?php echo $row['pro_price']; ?></td>
+                  <td>
+                    <a href="?action=update-from&id=<?php echo $row['pro_id']; ?>">編輯</a>
+                    ｜
+                    <a href="?action=delete&id=<?php echo $row['pro_id']; ?>">刪除</a>
+                  </td>
+                </tr>
                 <?php
               }
               ?>
+            </tbody>
+          </table>
+          <?php
+        }
+        ?>
+        <?php
+        if ($action == 'update-from') {
+          ?>
+          <h2>商品表單</h2>
+          <h3>編輯商品資訊：</h3>
+          <form action="?action=update" method="post">
+            <input type="hidden" name="id" value="<?php echo $data['pro_id']; ?>">
+            <div class="mb-3">
+              <label for="name" class="form-label">商品名稱</label>
+              <input type="text" class="form-control" id="name" name="name" value="<?php echo $data['pro_name']; ?>">
+            </div>
+            <div class="mb-3">
+              <label for="price" class="form-label">商品價格</label>
+              <input type="text" class="form-control" id="price" name="price" value="<?php echo $data['pro_price']; ?>">
+            </div>
+            <div class="mb-3">
+              <label for="details" class="form-label">商品描述</label>
+              <textarea class="form-control" id="details" name="details"><?php echo $data['pro_details']; ?></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">更新</button>
+          </form>
+          <?php
+        }
+        ?>
       </div>
     </main>
+    <footer>
+      © 2025 ITSA 管理面板。保留所有權利，ITSA 2024設計
+    </footer>
   </div>
-  <!-- <footer>
-    <p>© 2025 ITSA 管理面板。保留所有權利，ITSA 2024設計</p>
-  </footer> -->
 
   <script src="./js/bootstrap.min.js"></script>
   <script src="./js/team104.js"></script>
