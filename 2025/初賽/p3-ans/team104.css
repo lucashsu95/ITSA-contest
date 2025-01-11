@@ -62,6 +62,7 @@ body {
 }
 
 .header-bar.active{
+    transition: width .3s;
     margin-left:auto;
 }
 
