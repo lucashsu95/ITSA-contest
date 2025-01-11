@@ -1,0 +1,69 @@
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-color: #f9f9f9;
+    font-family: Arial, sans-serif;
+}
+
+.calculator {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 320px;
+    padding: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.display {
+    width: 100%;
+    height: 60px;
+    background-color: #f3f3f3;
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    font-size: 1.5em;
+    text-align: right;
+    line-height: 60px;
+    padding-right: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.buttons {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr); /* 四列 */
+    grid-gap: 5px;
+}
+
+.btn {
+    border: 1px solid #ccc;
+    font-size: 1.2em;
+    padding: 15px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn.number {
+    background-color: #fff; /* 數字按鈕白色背景 */
+}
+
+.btn.operator {
+    background-color: #d3d3d3; /* 運算符按鈕灰色背景 */
+}
+
+.btn.equal {
+    grid-row: span 4; /* 佔兩行 */
+    background-color: #d3d3d3;
+}
+
+
+
+.btn:hover {
+    background-color: #cfcfcf;
+}
+
+.btn:active {
+    background-color: #bfbfbf;
+}
