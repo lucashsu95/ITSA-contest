@@ -1,0 +1,14 @@
+table {
+  width: 100%;
+}
+
+th,
+td {
+  padding: 8px;
+  text-align: left;
+}
+
+table input {
+  width: 90%;
+  box-sizing: border-box;
+}

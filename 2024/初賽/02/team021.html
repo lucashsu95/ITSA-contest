@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="./team021.css" />
+  </head>
+  <body>
+    <h1>圖書管理系統</h1>
+    <h2 id="form-title">添加圖書</h2>
+    <form method="post">
+      <p><label>書名：</label><input type="text" name="name" id="" /></p>
+      <p><label>作者：</label><input type="text" name="author" id="" /></p>
+      <p><label>出版年份：</label><input type="text" name="year" id="" /></p>
+      <button>添加圖書</button>
+    </form>
+
+    <h2>圖書列表</h2>
+    <table border="1" style="border-collapse: collapse">
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>書名</th>
+          <th>作者</th>
+          <th>出版年份</th>
+          <th>操作</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <script>
+      const form = document.querySelector("form");
+      let id = 1;
+      const books = [
+        {
+          id: 1,
+          name: "nodejs",
+          author: "wenh",
+          year: 2023,
+          isEdit: false,
+        },
+      ];
+
+      const tbody = document.querySelector("tbody");
+      function render() {
+        tbody.innerHTML = "";
+        books.forEach((book) => {
+          if (book.isEdit) {
+            tbody.innerHTML += `
+            <tr>
+                <td>${book.id}</td>
+                <td><input name="name" value="${book.name}" /></td>
+                <td><input name="author" value="${book.author}" /></td>
+                <td><input name="year" value="${book.year}" /></td>
+                <td><button onclick="update(${book.id}, this)">保存</button></td>
+                <td><button onclick="cancel(${book.id})">取消</button></td>
+            </tr>
+            `;
+          } else {
+            tbody.innerHTML += `
+            <tr>
+                <td>${book.id}</td>
+                <td>${book.name}</td>
+                <td>${book.author}</td>
+                <td>${book.year}</td>
+                <td><button onclick="del(${book.id})">刪除</button></td>
+                <td><button onclick="edit(${book.id})">更新</button></td>
+            </tr>
+            `;
+          }
+        });
+      }
+      render();
+
+      function add(e) {
+        e.preventDefault();
+        const formData = new FormData(form);
+        const payload = Object.fromEntries(formData);
+        books.push({
+          id: ++id,
+          name: payload.name,
+          author: payload.author,
+          year: payload.year,
+        });
+        render();
+      }
+
+      function edit(id) {
+        books.forEach((book) => {
+          if (book.id === id) {
+            book.isEdit = true;
+          }
+        });
+        render();
+      }
+
+      function update(id, btn) {
+        const tr = btn.closest("tr");
+        const inputs = tr.querySelectorAll("input");
+        const formData = new FormData();
+        for (const input of inputs) {
+          formData.append(input.name, input.value);
+        }
+        const payload = Object.fromEntries(formData);
+        books.forEach((book) => {
+          if (book.id === id) {
+            book.name = payload.name;
+            book.author = payload.author;
+            book.year = payload.year;
+          }
+          book.isEdit = false;
+        });
+        render();
+      }
+
+      function cancel(id) {
+        books.forEach((book) => {
+          if (book.id === id) {
+            book.isEdit = false;
+          }
+        });
+        render();
+      }
+
+      function del(id) {
+        const idx = books.findIndex((x) => x.id === id);
+        books.splice(idx, 1);
+        render();
+      }
+
+      form.addEventListener("submit", add);
+    </script>
+  </body>
+</html>
