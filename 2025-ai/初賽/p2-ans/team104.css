@@ -1,0 +1,149 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+h2 {
+    color: #fff;
+}
+
+.chat-container {
+    width: 100%;
+    max-width: 600px;
+    min-width: 300px;
+    height: 700px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #fff;
+    display: flex;
+    flex-direction: column;
+}
+
+header {
+    background-color: #262626;
+    color: #262626;
+    text-align: center;
+    padding: 5px;
+    border-radius: 8px 8px 0 0;
+}
+
+.chat-box {
+    flex: 1;
+    padding: 10px;
+    min-height: 300px;
+    max-height: 600px;
+    border-top: 1px solid #1C1C1C;
+    border-bottom: 1px solid #1C1C1C;
+    background-color: #1C1C1C;
+    overflow-y: auto;
+    color: #fff;
+}
+
+
+.chat-box p {
+    display: inline-block;
+    margin: 10px 0;
+    padding: 10px;
+    border-radius: 8px;
+    color: #fff;
+    word-wrap: break-word;
+    max-width: 100%;
+    background-color: #262626;
+    box-sizing: border-box;
+}
+
+.chat-box .message {
+    margin: 10px 0;
+}
+
+/* User messages */
+.user {
+    margin-left: auto;
+    text-align: right;
+}
+
+.user p {
+    background-color: #429486;
+}
+
+/* Bot messages */
+.bot {
+    margin-right: auto;
+    text-align: left;
+}
+
+/* Image messages */
+.message img {
+    background-color: #429486;
+    padding: 20px 10px;
+    display: inline-block;
+}
+
+.image img {
+    max-width: 50%;
+    border-radius: 5px;
+}
+
+.input-area {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    gap: 10px;
+    background-color: #000;
+}
+
+input[type="text"] {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #2D2D2D;
+    border-radius: 30px;
+    background-color: #2D2D2D;
+    color: #fff;
+}
+
+
+#fileInput {
+    display: none;
+}
+
+/* 自定義文件選擇器的替代樣式 */
+.custom-file-input {
+    display: inline-block;
+    cursor: pointer;
+    font-size: 1.5rem; /* 調整圖示大小 */
+    color: #333;
+    background-color: #3C3C3C;
+    border-radius: 50%;
+    border: none;
+    outline: none;
+}
+
+.custom-file-input:hover {
+    color: #555; /* 改變 hover 狀態顏色 */
+}
+
+button {
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #333;
+    color: #00ff88;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #555;
+}
+
+@media screen and (max-width: 768px) {
+    .chat-container {
+        width: 90%;
+    }
+}
