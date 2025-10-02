@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>詐騙關鍵字每週報表系統</title>
+    <link rel="stylesheet" href="./team047.css" />
+  </head>
+  <body>
+    <div class="container">
+      <h1>詐騙關鍵字每週報表系統</h1>
+
+      <div class="controls">
+        <label for="weekSelect">選擇週期範圍：</label>
+        <select id="weekSelect">
+          <option value="">載入中...</option>
+        </select>
+        <button id="downloadBtn">📥 下載CSV報表</button>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="barChart"></canvas>
+      </div>
+
+      <div class="chart-container">
+        <canvas id="lineChart"></canvas>
+      </div>
+    </div>
+
+    <script src="./Chartjs/chart.js"></script>
+    <script src="./team047.js"></script>
+  </body>
+</html>

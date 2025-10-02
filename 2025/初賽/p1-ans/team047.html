@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>team047</title>
+    <link rel="stylesheet" href="team047.css">
+</head>
+<body>
+    <h1 class="title">河內塔遊戲</h1>
+    <div class="controls">
+        <label for="diskCount">請輸入圓盤數字(3以上): </label>
+         <select name="" id="diskCount">
+            <option value="2">2</option>
+            <option value="3">3</option>
+            <option value="4">4</option>
+            <option value="5">5</option>
+            <option value="6">6</option>
+            <option value="7">7</option>
+            <option value="8">8</option>
+            <option value="9">9</option>
+         </select>
+    </div>
+    <div class="infoContainer">
+        <div class="info">最少移動步數: <span id="min-moves">0</span></div>
+        <div class="info">目前移動步數: <span id="current-moves">0</span></div>
+        <button id="reset-btn" class="resetBtn">重新開始</button>
+    </div>
+    <div>
+        <p>遊戲目標：將所有圓盤移動至C柱上</p>
+        <p>遊戲規則：只能移動一個圓盤，且不可將較大的圓盤放在較小的圓盤上。</p>
+    </div>
+    <div id="game-container">
+        <div class="tower-wrapper">
+            <div class="tower-label">A</div>
+            <div class="tower" id="tower-a" data-tower="A">
+                <div class="rod"></div>
+            </div>
+        </div>
+        <div class="tower-wrapper">
+            <div class="tower-label">B</div>
+            <div class="tower" id="tower-b" data-tower="B">
+                <div class="rod"></div>
+            </div>
+        </div>
+        <div class="tower-wrapper">
+            <div class="tower-label">C</div>
+            <div class="tower" id="tower-c" data-tower="C">
+                <div class="rod"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="team047.js"></script>
+
+</body>
+
+</html>

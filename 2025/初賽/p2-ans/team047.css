@@ -1,0 +1,116 @@
+* {
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f5f5f5;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: white;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 30px;
+}
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 15px;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  align-items: center;
+}
+
+.controls select,
+.controls button {
+  padding: 10px 15px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+  background-color: white;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.controls select:hover,
+.controls button:hover {
+  border-color: #007bff;
+  box-shadow: 0 2px 5px rgba(0, 123, 255, 0.2);
+}
+
+.controls button {
+  background-color: #007bff;
+  color: white;
+  border-color: #007bff;
+}
+
+.controls button:hover {
+  background-color: #0056b3;
+}
+
+.chart-container {
+  position: relative;
+  height: 450px;
+  margin-bottom: 40px;
+  padding: 20px;
+  background-color: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* 響應式設計 */
+@media (max-width: 1024px) {
+  .chart-container {
+    height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 15px;
+  }
+
+  .chart-container {
+    height: 350px;
+    padding: 15px;
+  }
+
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .controls select,
+  .controls button {
+    width: 100%;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 10px;
+  }
+
+  .chart-container {
+    height: 300px;
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 1.5rem;
+  }
+}

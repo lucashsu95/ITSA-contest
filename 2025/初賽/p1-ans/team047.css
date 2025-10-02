@@ -1,0 +1,132 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.title{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    font-size: 2.5em;
+    color: #15e4f3;
+}
+
+.controls, .info {
+    font-size: 1.2em;
+    margin-bottom: 10px;
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+#diskCount{
+    width: 60px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
+    font-size: 1em;
+}
+
+.infoContainer {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 5px;
+}
+
+.info {
+    gap: 30px;
+}
+
+.resetBtn{
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    font-weight: bold;
+    font-size: 1.2em;
+    width: 100px;
+    background-color: #ee4c4c;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#game-container {
+    display: flex;
+    justify-content: space-around;
+    width: 100%;
+    max-width: 1200px;
+    height: 500px;
+    background-color: #f8edc8e7;
+    border: 2px solid #8b4513;
+    border-radius: 10px;
+    padding: 20px;
+    align-items: flex-end;
+}
+
+.tower-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 30%;
+    height: 100%;
+}
+
+.tower {
+    width: 100%;
+    height: 90%;
+    border-bottom: 8px solid #8b4513;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    position: relative;
+}
+
+.rod {
+    width: 10px;
+    height: 100%;
+    background-color: #8b4513;
+    position: absolute;
+    bottom: 0;
+    border-radius: 5px 5px 0 0;
+}
+
+.disk {
+    height: 20px;
+    border-radius: 10px;
+    cursor: grab;
+    margin-bottom: 2px;
+    z-index: 10;
+    transition: background-color 0.2s;
+    text-align: center;
+    color: white;
+    font-weight: bold;
+    line-height: 15px;
+}
+
+.disk:active {
+    cursor: grabbing;
+}
+
+.dragging {
+    opacity: 0.5;
+}
+
+.tower.drag-over {
+    background-color: #e0e0e0;
+}
+
+#win-message {
+    margin-top: 20px;
+    font-size: 2em;
+    color: rgb(240, 0, 0);
+    font-weight: bold;
+}
+
+.hidden {
+    display: none;
+}
