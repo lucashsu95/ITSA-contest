@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ITSA 2024/2025 初賽前端入門教學簡報</title>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/theme/black.css"
+      id="theme"
+    />
+    <style>
+      :root {
+        --accent: #6ee7ff;
+        --warn: #ffd166;
+        --ok: #80ed99;
+      }
+      .reveal h1,
+      .reveal h2,
+      .reveal h3 {
+        text-transform: none;
+      }
+      .reveal .small {
+        font-size: 0.72em;
+        opacity: 0.9;
+      }
+      .reveal .box {
+        border: 2px solid #ffffff33;
+        border-radius: 12px;
+        padding: 14px 18px;
+        margin: 10px 0;
+        text-align: left;
+      }
+      .reveal .accent {
+        color: var(--accent);
+      }
+      .reveal .warn {
+        color: var(--warn);
+      }
+      .reveal .ok {
+        color: var(--ok);
+      }
+      .reveal ul li {
+        margin: 0.3em 0;
+      }
+      .reveal code {
+        background: #ffffff12;
+        padding: 2px 6px;
+        border-radius: 5px;
+      }
+      .reveal .demo-image {
+        max-height: 62vh;
+        width: auto;
+        border: 2px solid #ffffff33;
+        border-radius: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="reveal">
+      <div class="slides">
+        <section>
+          <h1>ITSA 2024/2025 初賽</h1>
+          <h3 class="accent">前端零基礎教學簡報</h3>
+          <p>目標：讓不會前端的學生也能完成比賽題</p>
+          <p class="small">教學核心：題目拆解步驟 = 簡報播放順序</p>
+        </section>
+
+        <section>
+          <h2>這份簡報怎麼教</h2>
+          <div class="box">
+            <p><strong>每張投影片只教一件事：</strong>先看需求，再做最小可行版本。</p>
+            <p><strong>每個題目都走同一套路：</strong>版面 -> 互動 -> 資料 -> 驗收。</p>
+            <p><strong>每段都有可交作業點：</strong>避免最後 20 分鐘才發現不能交。</p>
+          </div>
+          <p class="small">老師操作：一頁講解 + 一頁示範 + 一頁學生跟做</p>
+        </section>
+
+        <section>
+          <h2>2024/2025 初賽題型地圖</h2>
+          <div class="box">
+            <p><strong>2024：</strong>RWD 切版、前端 CRUD、PHP + MySQL 系統</p>
+            <p><strong>2025：</strong>計算機、聊天框、RWD 登入、產品管理系統</p>
+            <p><strong>共同能力：</strong>HTML/CSS、JavaScript 事件、表單、CRUD 思維</p>
+          </div>
+          <p class="warn">結論：不是要會很多框架，而是要會「拆題與交付順序」。</p>
+        </section>
+
+        <section>
+          <section>
+            <h2>統一解題流程（7 步）</h2>
+            <ol>
+              <li class="fragment">讀評分點，圈出「有分數的功能」。</li>
+              <li class="fragment">先做骨架 HTML（可看到版面）。</li>
+              <li class="fragment">補 CSS（先桌機，再 RWD）。</li>
+              <li class="fragment">補 JS 互動（按鈕、切換、送出）。</li>
+              <li class="fragment">有資料就做 CRUD（先 C/R，再 U/D）。</li>
+              <li class="fragment">逐項自測（對照題目分點）。</li>
+              <li class="fragment">命名、路徑、截圖、打包上傳。</li>
+            </ol>
+          </section>
+
+          <section>
+            <h3>步驟 1：讀評分點</h3>
+            <div class="box">
+              <p>把題目轉成待辦清單，格式固定：</p>
+              <p><code>[分數] [功能] [驗收條件] [檔名]</code></p>
+            </div>
+            <p class="small">新手常錯：直接寫程式，卻漏掉「命名規則」和「上傳路徑」。</p>
+          </section>
+
+          <section>
+            <h3>步驟 2：骨架先行</h3>
+            <div class="box">
+              <p>先做可見結構：</p>
+              <p><code>header / nav / main / section / footer</code></p>
+              <p>先不美化，先讓評審「看得見你有做」。</p>
+            </div>
+          </section>
+
+          <section>
+            <h3>步驟 3：CSS 與 RWD</h3>
+            <div class="box">
+              <p>固定做法：</p>
+              <p><code>桌機版完成 -> @media (max-width: 900/768/750px)</code></p>
+              <p>每做完一段就縮放瀏覽器檢查。</p>
+            </div>
+          </section>
+
+          <section>
+            <h3>步驟 4~7：互動、CRUD、驗收、打包</h3>
+            <ul>
+              <li>事件綁定：點擊、輸入、Enter 鍵、上傳檔案。</li>
+              <li>CRUD：先把資料顯示出來，再加新增/刪除/更新。</li>
+              <li>驗收：每個子題至少跑一次示範。</li>
+              <li>交付：檔名、相對路徑、截圖不可漏。</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>2024 初賽題目拆解</h2>
+            <p>題目 1：RWD 首頁、題目 2：圖書 CRUD、題目 3：健康度量系統</p>
+          </section>
+
+          <section>
+            <h3>2024 題一（RWD 首頁）教學拆解</h3>
+            <ol>
+              <li class="fragment">先切 3 區：導覽列、頁首、內容區。</li>
+              <li class="fragment">做桌機寬版（>900px）等寬與交疊效果。</li>
+              <li class="fragment">做中尺寸（>750px）滿版。</li>
+              <li class="fragment">做小尺寸（&lt;750px）單欄堆疊。</li>
+            </ol>
+            <p class="ok">教學提示：這題是 RWD 基礎總複習。</p>
+          </section>
+
+          <section>
+            <h3>2024 題一參考圖（圖 1-2）</h3>
+            <img
+              class="demo-image"
+              src="./assets/2024-rwd-figure-page-3.png"
+              alt="2024 初賽題一 RWD 首頁參考畫面"
+            />
+            <p class="small">講解重點：導覽列、頁首與兩列圖片文字交疊版型。</p>
+          </section>
+
+          <section>
+            <h3>2024 題一參考圖（圖 1-3）</h3>
+            <img
+              class="demo-image"
+              src="./assets/2024-rwd-figure-page-4.png"
+              alt="2024 初賽題一 RWD 中尺寸參考畫面"
+            />
+            <p class="small">講解重點：瀏覽器寬度超過 750px，版面改為滿版。</p>
+          </section>
+
+          <section>
+            <h3>2024 題一參考圖（圖 1-4）</h3>
+            <img
+              class="demo-image"
+              src="./assets/2024-rwd-figure-page-5.png"
+              alt="2024 初賽題一 RWD 小尺寸參考畫面"
+            />
+            <p class="small">講解重點：瀏覽器寬度低於 750px，切成單欄堆疊。</p>
+          </section>
+
+          <section>
+            <h3>2024 題二（圖書管理）教學拆解</h3>
+            <div class="box">
+              <p><strong>最小可行版本順序：</strong></p>
+              <p>新增書籍 -> 顯示列表 -> 刪除 -> 更新</p>
+            </div>
+            <p>用陣列暫存資料即可，不要一開始就追求複雜 UI。</p>
+          </section>
+
+          <section>
+            <h3>2024 題二：帶著做 01（先做骨架）</h3>
+            <div class="box">
+              <p><strong>本頁完成目標：</strong>畫面上要看得到「輸入區 + 列表區」。</p>
+              <p><strong>學生跟做：</strong>建立 <code>form</code>、三個輸入欄位、一個新增按鈕、一個列表容器。</p>
+            </div>
+            <ul>
+              <li>欄位：書名、作者、出版年份。</li>
+              <li>列表先放假資料 1 筆，確認版型完成。</li>
+              <li>先不寫刪除/更新功能。</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>2024 題二：帶著做 02（新增 + 顯示）</h3>
+            <div class="box">
+              <p><strong>本頁完成目標：</strong>按下新增，列表會出現新書。</p>
+              <p><strong>老師口令：</strong>「資料先進陣列，再呼叫 <code>render()</code> 重畫列表」。</p>
+            </div>
+            <ul>
+              <li>先做空值檢查（任一欄空白就 return）。</li>
+              <li>資料格式固定：<code>{ title, author, year }</code>。</li>
+              <li>每次新增成功後，清空輸入框。</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>2024 題二：帶著做 03（刪除功能）</h3>
+            <div class="box">
+              <p><strong>本頁完成目標：</strong>每筆資料旁都有刪除按鈕，按下可移除。</p>
+              <p><strong>老師口令：</strong>「按鈕帶 index，刪完就重畫。」</p>
+            </div>
+            <ul>
+              <li>列表每筆都產生 <code>刪除</code> 按鈕。</li>
+              <li>刪除邏輯：<code>books.splice(index, 1)</code>。</li>
+              <li>刪除後再次呼叫 <code>render()</code>。</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>2024 題二：帶著做 04（更新功能）</h3>
+            <div class="box">
+              <p><strong>本頁完成目標：</strong>點更新後可改書名/作者/年份並存回列表。</p>
+              <p><strong>建議作法：</strong>先把資料帶回輸入欄，再按「儲存更新」。</p>
+            </div>
+            <ul>
+              <li>使用 <code>editingIndex</code> 記錄目前編輯哪一筆。</li>
+              <li>新增模式與更新模式共用同一顆按鈕。</li>
+              <li>更新成功後把 <code>editingIndex</code> 重設為 <code>-1</code>。</li>
+            </ul>
+          </section>
+
+          <section>
+            <h3>2024 題二：帶著做 05（課堂驗收）</h3>
+            <div class="box">
+              <p><strong>3 分鐘驗收清單：</strong></p>
+              <p class="small">新增 1 筆 -> 再新增 1 筆 -> 刪掉第 1 筆 -> 更新剩下那筆</p>
+            </div>
+            <ul>
+              <li>畫面是否立即更新（不用重整頁面）。</li>
+              <li>年份是否只接受數字。</li>
+              <li>檔名是否符合題目要求（例如 <code>team021.html</code>）。</li>
+            </ul>
+            <p class="ok">這 5 頁做完，題二基本分就穩了。</p>
+          </section>
+
+          <section>
+            <h3>2024 題二：老師示範程式骨架（精簡版）</h3>
+            <pre><code data-trim>
+const books = [];
+let editingIndex = -1;
+
+function render() {
+  // 1. 清空列表容器
+  // 2. books.forEach(...) 產生每筆資料 + 刪除/更新按鈕
+}
+
+function submitBook() {
+  const book = readForm(); // { title, author, year }
+  if (!book.title || !book.author || !book.year) return;
+
+  if (editingIndex === -1) books.push(book);
+  else books[editingIndex] = book;
+
+  editingIndex = -1;
+  clearForm();
+  render();
+}
+
+function removeBook(index) { books.splice(index, 1); render(); }
+function editBook(index) { fillForm(books[index]); editingIndex = index; }
+            </code></pre>
+            <p class="small">講法：先講資料流（讀表單 -> 改陣列 -> render），再補每個函式內容。</p>
+          </section>
+
+          <section>
+            <h3>2024 題三（健康度量）教學拆解</h3>
+            <ul>
+              <li>先畫資料表：人員、醫檢項目、檢查結果。</li>
+              <li>先做登入流程，再做角色功能（醫檢員/受檢者）。</li>
+              <li>先完成查詢，再補新增/刪除/更新。</li>
+              <li>最後補密碼規則與首次登入改密碼。</li>
+            </ul>
+            <p class="warn">難點在「流程完整」，不是單一頁面漂亮。</p>
+          </section>
+        </section>
+
+        <section>
+          <section>
+            <h2>2025 初賽題目拆解</h2>
+            <p>題目 1：計算機、題目 2：聊天框、題目 3：RWD 登入、題目 4：產品管理</p>
+          </section>
+
+          <section>
+            <h3>2025 題一（計算機）教學拆解</h3>
+            <ol>
+              <li class="fragment">先做按鈕與顯示區 UI。</li>
+              <li class="fragment">按下按鈕可即時顯示字串。</li>
+              <li class="fragment">按 <code>=</code> 計算（先基本四則，再先乘除後加減）。</li>
+              <li class="fragment">按 <code>C</code> 清空。</li>
+            </ol>
+          </section>
+
+          <section>
+            <h3>2025 題二（聊天框）教學拆解</h3>
+            <ul>
+              <li>兩種送出：傳送鍵與 Enter。</li>
+              <li>送出後清空輸入框，並自動捲到底。</li>
+              <li>圖片上傳限制：<code>jpg/jpeg/png</code>、<= 5MB。</li>
+              <li>固定回覆：文字回「已收到訊息！」、圖片回「已收到圖片！」。</li>
+            </ul>
+            <p class="ok">重點：事件與條件判斷，不需要真的串 AI。</p>
+          </section>
+
+          <section>
+            <h3>2025 題三（RWD 會員登入）教學拆解</h3>
+            <ol>
+              <li class="fragment">做主畫面（左上選單、右上登入）。</li>
+              <li class="fragment">做側欄開合與 transition。</li>
+              <li class="fragment">做登入彈窗與關閉按鈕。</li>
+              <li class="fragment">補 RWD 版本（圖 3-5 到 3-8）。</li>
+            </ol>
+          </section>
+
+          <section>
+            <h3>2025 題四（產品管理）教學拆解</h3>
+            <ul>
+              <li>先建 DB 與資料表，再連線 PHP。</li>
+              <li>先做「檢視商品」讀取資料。</li>
+              <li>再做新增、刪除、編輯更新。</li>
+              <li>最後做 <code>&lt;768px</code> 側邊欄隱藏。</li>
+            </ul>
+          </section>
+        </section>
+
+        <section>
+          <h2>給零基礎學生的教學節奏</h2>
+          <div class="box">
+            <p><strong>第 1 段（20 分）</strong> 題目翻譯成 TODO + 評分對照表</p>
+            <p><strong>第 2 段（35 分）</strong> 版面骨架與 RWD</p>
+            <p><strong>第 3 段（35 分）</strong> JS 互動與 CRUD</p>
+            <p><strong>第 4 段（20 分）</strong> 測試、截圖、命名、打包</p>
+          </div>
+          <p class="small">每段結尾都要有「可提交版本」。</p>
+        </section>
+
+        <section>
+          <h2>簡報與教學綁定規則</h2>
+          <ol>
+            <li>老師只照簡報順序教，不跳步。</li>
+            <li>每一頁都要有「這頁完成產出」。</li>
+            <li>學生跟做完一頁就存檔一次。</li>
+            <li>每三頁進行一次 3 分鐘驗收。</li>
+          </ol>
+          <p class="accent">這樣學生即使不熟前端，也能穩定拿到基本分。</p>
+        </section>
+
+        <section>
+          <h2>結語：先拿穩定分，再衝加分</h2>
+          <ul>
+            <li>先完成每題的核心流程（可操作 + 可驗收）。</li>
+            <li>再補動畫、細節、視覺一致性。</li>
+            <li>最後 10 分鐘只做交付檢查，不再大改程式。</li>
+          </ul>
+          <p class="ok">你現在可以直接拿這份簡報去上第一堂課。</p>
+        </section>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/reveal.js@5/dist/reveal.js"></script>
+    <script>
+      Reveal.initialize({
+        hash: true,
+        controls: true,
+        progress: true,
+        slideNumber: true,
+        transition: "slide",
+      });
+    </script>
+  </body>
+</html>
