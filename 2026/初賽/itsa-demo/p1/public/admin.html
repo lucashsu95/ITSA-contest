@@ -1,0 +1,214 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title>叫號與候位系統 - 櫃台管理</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #f3f4f6;
+      }
+      header {
+        background: #212529;
+        color: #fff;
+        padding: 12px 40px;
+        display: flex;
+        justify-content: space-between;
+      }
+      header a,
+      header button {
+        color: #fff;
+        background: none;
+        border: 1px solid #fff;
+        padding: 2px 8px;
+        text-decoration: none;
+        font-size: 13px;
+        margin-left: 6px;
+      }
+      section {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      #app {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 16px;
+      }
+      #login {
+        max-width: 340px;
+        margin: 30px auto;
+      }
+      input {
+        width: 100%;
+        padding: 6px;
+        margin: 4px 0 10px;
+        box-sizing: border-box;
+      }
+      .big {
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        color: #444;
+        padding: 20px;
+      }
+      .btns {
+        display: flex;
+        gap: 8px;
+      }
+      .btns button {
+        flex: 1;
+        padding: 8px;
+        color: #fff;
+        border: 0;
+        border-radius: 4px;
+      }
+      #next {
+        background: #0d6efd;
+      }
+      #done {
+        background: #198754;
+      }
+      button:disabled {
+        opacity: 0.5;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        text-align: left;
+        padding: 4px;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+      }
+      #msg {
+        color: #b02a37;
+        margin-top: 8px;
+        min-height: 1em;
+      }
+    </style>
+  </head>
+  <body>
+    <header>
+      <b>叫號與候位系統 - 櫃台管理</b
+      ><span
+        ><a href="index.html">前台取號</a
+        ><button id="out" hidden>登出</button></span
+      >
+    </header>
+    <section id="login" hidden>
+      <h3>管理者登入</h3>
+      帳號<input id="u" />密碼<input id="p" type="password" /><button
+        id="go"
+        style="width: 100%; padding: 8px"
+      >
+        登入
+      </button>
+      <div id="msg0" style="color: #b02a37"></div>
+    </section>
+    <div id="app" hidden>
+      <div>
+        <section>
+          <h3>目前服務中的號碼</h3>
+          <div id="cur" class="big"></div>
+          <div class="btns">
+            <button id="next">下一位</button><button id="done">完成服務</button>
+          </div>
+          <div id="msg"></div>
+        </section>
+        <section>
+          <h3>等待清單</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>號碼</th>
+                <th>服務項目</th>
+                <th>取號時間</th>
+              </tr>
+            </thead>
+            <tbody id="wl"></tbody>
+          </table>
+        </section>
+      </div>
+      <section>
+        <h3>歷史紀錄</h3>
+        <table>
+          <thead>
+            <tr>
+              <th>號碼</th>
+              <th>服務項目</th>
+              <th>取號時間</th>
+              <th>叫號時間</th>
+              <th>完成時間</th>
+            </tr>
+          </thead>
+          <tbody id="hs"></tbody>
+        </table>
+      </section>
+    </div>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const api = (p, m = "GET", b) =>
+        fetch(p, {
+          method: m,
+          headers: { "Content-Type": "application/json" },
+          body: b && JSON.stringify(b),
+        });
+      async function load() {
+        const h = await api("/api/admin/history");
+        const on = h.status !== 401;
+        $("login").hidden = on;
+        $("app").hidden = !on;
+        $("out").hidden = !on;
+        if (!on) return;
+        const hist = await h.json(),
+          s = await (await api("/api/state")).json();
+        $("cur").textContent = s.current
+          ? `${s.current.number} (${s.current.service})`
+          : "尚無服務中的號碼";
+        $("wl").innerHTML =
+          s.waiting
+            .map((t) => `<tr><td>${t.number}<td>${t.service}<td>${t.createdAt}`)
+            .join("") || "<tr><td colspan=3>目前沒有等待中的號碼";
+        $("hs").innerHTML =
+          hist
+            .map(
+              (t) =>
+                `<tr><td>${t.number}<td>${t.service}<td>${t.createdAt}<td>${t.calledAt}<td>${t.finishedAt}`,
+            )
+            .join("") || "<tr><td colspan=5>尚無歷史紀錄";
+        $("next").disabled = !!s.current;
+        $("done").disabled = !s.current;
+      }
+      async function act(path) {
+        const r = await api(path, "POST");
+        $("msg").textContent = r.ok ? "" : (await r.json()).error;
+        load();
+      }
+      $("next").onclick = () => act("/api/admin/next");
+      $("done").onclick = () => act("/api/admin/complete");
+      $("go").onclick = async () => {
+        const r = await api("/api/login", "POST", {
+          username: $("u").value,
+          password: $("p").value,
+        });
+        $("msg0").textContent = r.ok ? "" : "帳號或密碼錯誤";
+        load();
+      };
+      $("out").onclick = async () => {
+        await api("/api/logout", "POST");
+        load();
+      };
+      load();
+      setInterval(load, 2000);
+    </script>
+  </body>
+</html>

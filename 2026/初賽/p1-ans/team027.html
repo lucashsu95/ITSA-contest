@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="team027.css">
+</head>
+<body>
+    <header class="nv">
+        <h2>
+            叫號與候位系統
+        </h2>
+        <div><a href="team027admin.html." class="nvbtn">櫃台管理</a>
+        </div>
+
+    </header>
+    <main class="cont">
+        <div class="gr2c">
+            <section class="card">
+                <h2 class="card-tt">取號</h2>
+                <div class="seversop">
+                    <button type="button" class="service-btn" data-code="A">用戶申辦(A)</button>
+                    <button type="button" class="service-btn" data-code="C">諮詢(C)</button>
+                    <button type="button" class="service-btn" data-code="G">一般服務(G)</button>
+                </div>
+                <button id="btnticker" class="btn-pr" disabled>取得號碼</button>
+                
+                <div id="tickresp" class="tick-bx" style="display: none ;">
+                    <h3>您的號碼: -</h3>   
+                    <p>服務項目: -</p>   
+                    <p>取號時間: -</p>   
+                </div>
+
+
+            </section>
+
+            <div>
+                <section class="card">
+                    <h2 class="cardTt">目前叫號</h2>
+                    <div class="call-dp">
+                        <div id="currservive" class="call-emp">尚未服務中的號碼</div>
+                    </div>
+                </section>
+            </div>
+
+            <section class="card">
+                <h2 class="cardTt">等待清單</h2>
+                <div class="table-resp">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th style="width: 25%;">號碼</th>
+                                <th style="width: 30%;">服務項目</th>
+                                <th style="width: 45%;">取號時間</th>
+                            </tr>
+                        </thead>
+                        <tbody id=waitlist>
+                            <tr><td colspan="3" class="textemp">目前沒有等待中的號碼</td></tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <script src="team027.js"></script>
+</body>
+</html>

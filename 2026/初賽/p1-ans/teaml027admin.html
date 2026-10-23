@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="team027.css">
+</head>
+<body>
+    <header class="nv">
+        <h1>叫號與候位系統-櫃台管理</h1>
+        <div>
+            <a href="team027.html" class="nvbtn">前台取號</a>
+            <button id="btnlogin" class="nvbtn" style="display: none;">登出</button>
+        </div>
+    </header>
+    <main class="cont">
+        <div id="loginview" class=" loginbox">
+            <h2 class="card-tt" style="text-align: center;">管理者登入</h2>
+            <div id="loginerr" class="alerad" style="display: none;"></div>
+            <form id="loginform">
+                <div class="from-gp">
+
+                    <label for="username">帳號</label>
+                    <input type="text" name="" id=username class="form-contrl" placeholder="請輸入帳號" required value="admin">
+                </div>
+                <div class="from-gp">
+                    <label for="username">密碼</label>
+                    <input type="text" name="" id=username class="form-contrl" placeholder="請輸入密碼" required value="admin">
+
+                </div>
+                <button type="submit" class="btn-pr">登入</button>
+            </form>    
+        
+        </div>
+
+        <div id="adminDashboard" style="display: none;">
+            <div class="gr2c">
+                <div>
+                    <section class="card">
+                        <h2 class="card-tt">目前服務中的號碼</h2>
+                        <div class="call-dp">
+
+                            <div id="adminCurr" class="call-emp">尚無服務中的號碼</div>
+                        </div>
+                        <div class="admin-acti">
+                            <button id="btnnext" class="btn-actnext">下一位</button>
+                            <button id="btncomplete" class="btn-actcompet" disabled>完成服務</button>
+
+                        </div>
+                        <div id="actalr" class="alerad" style="display: none;"></div>
+                    </section>
+                
+                    <section class="card">
+                        <h2 class="card-tt">等待清單</h2>
+                        <div class="table-resp">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>號碼</th>
+                                        <th>服務項目</th>
+                                        <th>取號時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminwaitlist">
+                                    <tr><td colspan="3" class="textemp">目前沒有等待中的號碼</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+
+
+                
+                
+                
+                
+                </div>
+
+                <div>
+                    <section class="card">
+                        <h2 class="card-tt">
+                            歷史紀錄
+                        </h2>
+                        <div class="table-resp">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>號碼</th>
+                                        <th>服務項目</th>
+                                        <th>取號時間</th>
+                                        <th>叫號時間</th>
+                                        <th>完成時間</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="adminhistlist">
+                                    <tr><td colspan="5" class="textemp">尚無歷史紀錄</td></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+        
+
+    </main>
+    <script src="teaml027admin.html"></script>
+</body>
+</html>

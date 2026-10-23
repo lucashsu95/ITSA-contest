@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="zh-Hant" data-bs-theme="dark">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width,initial-scale=1" />
+        <title>GamerHub</title>
+        <link href="../../bootstrap-5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" />
+        <style>
+            .fade-out {
+                opacity: 0;
+                transition: opacity 0.5s;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="loginV" class="container py-5" style="max-width: 360px" hidden>
+            <h3 class="mb-3">GamerHub 登入</h3>
+            <input id="u" class="form-control mb-2" placeholder="帳號" />
+            <input
+                id="p"
+                type="password"
+                class="form-control mb-2"
+                placeholder="密碼"
+            />
+            <button id="go" class="btn btn-primary w-100">登入</button>
+            <div id="err" class="text-danger mt-2"></div>
+        </div>
+
+        <div id="appV" hidden>
+            <nav class="navbar border-bottom px-3">
+                <b class="text-info">GamerHub</b>
+                <span
+                    >歡迎回來，<b id="me"></b>
+                    <button id="out" class="btn btn-sm btn-outline-danger ms-2">
+                        登出
+                    </button></span
+                >
+            </nav>
+            <div class="container-fluid">
+                <div class="row g-3 mt-1">
+                    <div class="col-12 col-lg-4">
+                        <div class="card card-body mb-3">
+                            <h5>我的喜愛清單</h5>
+                            <div class="input-group mb-2">
+                                <input
+                                    id="newGame"
+                                    class="form-control"
+                                    placeholder="輸入遊戲名稱"
+                                /><button id="add" class="btn btn-outline-info">
+                                    加入
+                                </button>
+                            </div>
+                            <div id="favs"></div>
+                        </div>
+                        <div class="card card-body">
+                            <h5>發布組隊大廳公告</h5>
+                            <label>選擇遊戲項目</label
+                            ><select
+                                id="pubGame"
+                                class="form-select mb-2"
+                            ></select>
+                            <label>預計開打時段</label
+                            ><input
+                                id="when"
+                                type="datetime-local"
+                                class="form-control mb-2"
+                            />
+                            <div class="row mb-2">
+                                <div class="col">
+                                    <label>最少成局人數</label
+                                    ><input
+                                        id="mn"
+                                        type="number"
+                                        value="2"
+                                        class="form-control"
+                                    />
+                                </div>
+                                <div class="col">
+                                    <label>最大滿員人數</label
+                                    ><input
+                                        id="mx"
+                                        type="number"
+                                        value="4"
+                                        class="form-control"
+                                    />
+                                </div>
+                            </div>
+                            <button id="pub" class="btn btn-warning">
+                                廣播號召隊友
+                            </button>
+                        </div>
+                    </div>
+                    <div class="col-12 col-lg-8">
+                        <ul class="nav nav-tabs mb-3">
+                            <li class="nav-item">
+                                <a class="nav-link active" id="t1" href="#"
+                                    >大廳組隊看板</a
+                                >
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" id="t2" href="#"
+                                    >我的遊戲行事曆</a
+                                >
+                            </li>
+                        </ul>
+                        <div id="boardV">
+                            <div class="d-flex justify-content-between mb-2">
+                                <h4>目前進行中的招募公告</h4>
+                                <select
+                                    id="flt"
+                                    class="form-select w-auto"
+                                ></select>
+                            </div>
+                            <div id="board" class="row g-2"></div>
+                        </div>
+                        <div id="calV" hidden>
+                            <h4 class="text-warning">
+                                已成局事件戰報 (Time Table)
+                            </h4>
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th>時段</th>
+                                        <th>遊戲品項</th>
+                                        <th>發起/隊員</th>
+                                        <th>狀態</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="cal"></tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <script src="./index.js"></script>
+    </body>
+</html>

@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8" />
+    <title>叫號與候位系統</title>
+    <style>
+      body {
+        margin: 0;
+        font-family: sans-serif;
+        background: #f3f4f6;
+      }
+      header {
+        background: #212529;
+        color: #fff;
+        padding: 12px 40px;
+        display: flex;
+        justify-content: space-between;
+      }
+      header a {
+        color: #fff;
+        border: 1px solid #fff;
+        padding: 2px 8px;
+        text-decoration: none;
+        font-size: 13px;
+      }
+      main {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        max-width: 1000px;
+        margin: 20px auto;
+        padding: 0 16px;
+      }
+      section {
+        background: #fff;
+        border: 1px solid #ddd;
+        border-radius: 6px;
+        padding: 16px;
+        margin-bottom: 16px;
+      }
+      #svc button {
+        display: block;
+        width: 100%;
+        margin-bottom: 8px;
+        padding: 8px;
+        background: #fff;
+        border: 1px solid #0d6efd;
+        color: #0d6efd;
+        border-radius: 4px;
+        text-align: left;
+      }
+      #svc button.on {
+        background: #cfe2ff;
+      }
+      #get {
+        width: 100%;
+        padding: 8px;
+        background: #0d6efd;
+        color: #fff;
+        border: 0;
+        border-radius: 4px;
+      }
+      #get:disabled {
+        opacity: 0.5;
+      }
+      #got {
+        background: #d1e7dd;
+        padding: 8px;
+        margin-top: 10px;
+        display: none;
+      }
+      .big {
+        font-size: 32px;
+        font-weight: bold;
+        text-align: center;
+        color: #444;
+        padding: 20px;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+      td,
+      th {
+        text-align: left;
+        padding: 4px;
+        border-bottom: 1px solid #eee;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header><b>叫號與候位系統</b><a href="admin.html">櫃台管理</a></header>
+    <main>
+      <section>
+        <h3>取號</h3>
+        <div id="svc"></div>
+        <button id="get" disabled>取得號碼</button>
+        <div id="got"></div>
+      </section>
+      <div>
+        <section>
+          <h3>目前叫號</h3>
+          <div id="cur" class="big"></div>
+        </section>
+        <section>
+          <h3>等待清單</h3>
+          <table>
+            <thead>
+              <tr>
+                <th>號碼</th>
+                <th>服務項目</th>
+                <th>取號時間</th>
+              </tr>
+            </thead>
+            <tbody id="wl"></tbody>
+          </table>
+        </section>
+      </div>
+    </main>
+    <script>
+      const $ = (id) => document.getElementById(id);
+      const S = { A: "開戶/申辦", C: "諮詢", G: "一般服務" };
+      let sel = null;
+      $("svc").innerHTML = Object.entries(S)
+        .map(([k, v]) => `<button data-k="${k}">${v} (${k})</button>`)
+        .join("");
+      $("svc").onclick = (e) => {
+        const k = e.target.dataset.k;
+        if (!k) return;
+        sel = k;
+        [...$("svc").children].forEach((b) =>
+          b.classList.toggle("on", b === e.target),
+        );
+        $("get").disabled = false;
+      };
+      $("get").onclick = async () => {
+        const r = await fetch("/api/tickets", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ service: S[sel] }),
+        });
+        const t = await r.json();
+        const g = $("got");
+        g.style.display = "block";
+        g.innerHTML = `您的號碼：<b>${t.number}</b><br>服務項目：${t.service}<br>取號時間：${t.createdAt}`;
+        load();
+      };
+      async function load() {
+        const s = await (await fetch("/api/state")).json();
+        $("cur").textContent = s.current
+          ? `${s.current.number} (${s.current.service})`
+          : "尚無服務中的號碼";
+        $("wl").innerHTML =
+          s.waiting
+            .map((t) => `<tr><td>${t.number}<td>${t.service}<td>${t.createdAt}`)
+            .join("") || "<tr><td colspan=3>目前沒有等待中的號碼";
+      }
+      load();
+      setInterval(load, 2000);
+    </script>
+  </body>
+</html>
