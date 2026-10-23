@@ -9,3 +9,10 @@ CREATE TABLE recruit_members(recruit_id INT, user_id INT, PRIMARY KEY(recruit_id
 INSERT INTO users(username,password) VALUES('yaya','1234'),('TenZ','1234'),('bob','1234');
 INSERT INTO games(name) VALUES('LOL'),('特戰英豪 (Valorant)'),('Apex 英雄');
 INSERT INTO user_games VALUES(1,1),(1,2),(2,1),(2,2),(3,3);
+INSERT INTO recruits(game_id, host_id, start_time, min_players, max_players)
+VALUES (1, 1, '2026-11-01 20:00:00', 2, 4),
+       (2, 2, '2026-11-02 21:00:00', 2, 3),
+       (3, 3, '2026-11-03 19:00:00', 3, 5);
+
+INSERT INTO recruit_members(recruit_id, user_id)
+VALUES (1, 1), (1, 2), (2, 2), (3, 3);

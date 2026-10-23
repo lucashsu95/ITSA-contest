@@ -1,7 +1,17 @@
 <?php
+
+$isApiRequest =
+  $_SERVER['REQUEST_METHOD'] === 'POST' &&
+  ($_SERVER['HTTP_X_REQUESTED_WITH'] ?? '') === 'fetch';
+
+if (!$isApiRequest) {
+  header('Location: team27.html', true, 302);
+  exit;
+}
+
 session_start();
 $pdo = new PDO(
-  'mysql:host=127.0.0.1;dbname=gamer_hub;charset=utf8mb4',
+  'mysql:host=localhost;dbname=gamer_hub;charset=utf8mb4',
   'root',
   '',
   [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION, PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC, PDO::ATTR_EMULATE_PREPARES => false]
@@ -11,7 +21,7 @@ $pdo = new PDO(
 function out($d, $c = 200)
 {
   http_response_code($c);
-  header('Content-Type: application/json');
+  header('Content-Type: application/json; charset=utf-8');
   exit(json_encode($d, JSON_UNESCAPED_UNICODE));
 }
 
@@ -31,7 +41,7 @@ $in = json_decode(file_get_contents('php://input'), true) ?: [];
 if ($a === 'login') {
   $u = q('select id,username from users where username=? and password=?', [$in['u'] ?? '', $in['p'] ?? ''])->fetch();
   if (!$u) out(['error' => '帳號或密碼錯誤'], 400);
-  session_regenerate_id(true);
+  session_regenerate_id(true); # 會產生一個新的 Session ID 
   $_SESSION['uid'] = $u['id'];
   $_SESSION['name'] = $u['username'];
   out(['ok' => 1]);
@@ -101,7 +111,7 @@ $base = "select r.id, r.game_id, g.name game, r.start_time, r.min_players mn, r.
   from recruits r join games g on g.id=r.game_id join users u on u.id=r.host_id";
 
 
-  out([
+out([
   'me' => $_SESSION['name'],
   'favs' => q('select g.id,g.name from user_games ug join games g on g.id=ug.game_id where ug.user_id=? order by g.id', [$uid])->fetchAll(),
   'lobby' => q("select * from ($base) t where cnt<mx and game_id in (select game_id from user_games where user_id=?) order by start_time", [$uid, $uid])->fetchAll(),

@@ -10,7 +10,7 @@ const $ = (id) => document.getElementById(id);
                 $("appV").hidden = !on;
             };
             async function api(a, body) {
-                const r = await fetch("api.php?a=" + a, {
+                const r = await fetch("team27.php?a=" + a, {
                     method: "POST",
                     headers: { "X-Requested-With": "fetch" },
                     body: JSON.stringify(body || {}),
@@ -79,8 +79,9 @@ const $ = (id) => document.getElementById(id);
             }
 
             $("go").onclick = async () => {
-                const r = await fetch("api.php?a=login", {
+                const r = await fetch("team27.php?a=login", {
                     method: "POST",
+                    headers: { "X-Requested-With": "fetch" },
                     body: JSON.stringify({ u: $("u").value, p: $("p").value }),
                 });
                 const j = await r.json();
