@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>問答管理系統</title>
+  <link rel="stylesheet" href="/team001.css">
+</head>
+<body>
+  <main class="panel">
+    <h1>問答管理系統</h1>
+
+    <input id="question" class="pill" type="text" placeholder="問題">
+    <input id="answer" class="pill" type="text" placeholder="答案">
+
+    <!-- 新增模式 -->
+    <button id="add-btn" class="pill" type="button">新增</button>
+
+    <!-- 編輯模式 -->
+    <div id="edit-actions" class="edit-actions" hidden>
+      <button id="update-btn" class="pill" type="button">更新</button>
+      <button id="cancel-btn" class="pill" type="button">取消</button>
+    </div>
+
+    <div id="faq-list"></div>
+  </main>
+
+  <script src="/js/admin.js"></script>
+</body>
+</html>

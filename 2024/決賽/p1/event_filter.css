@@ -1,0 +1,17 @@
+/* event_filter 元件專用樣式：引用此元件的頁面需一併載入本檔 */
+
+.event-filter-range {
+  background-color: #0d6efd;
+  color: #fff;
+  padding: 12px;
+}
+
+.event-filter-list {
+  background-color: #198754;
+  color: #fff;
+  padding: 12px;
+}
+
+.event-filter input[type="date"] {
+  margin: 0 4px;
+}

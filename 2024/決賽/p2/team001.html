@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>線上成績查詢系統</title>
+  <link rel="stylesheet" href="lib/bootstrap.min.css">
+  <link rel="stylesheet" href="team001.css">
+</head>
+<body>
+
+  <!-- 登入後才顯示的頂端列 -->
+  <header id="topbar" class="topbar d-none">
+    <span id="user-label"></span>
+    <button id="logout-btn" class="btn btn-outline-secondary btn-sm" type="button">登出</button>
+  </header>
+
+  <main class="container py-4">
+
+    <!-- ========== 登入 ========== -->
+    <section id="view-login" class="auth-card card card-body">
+      <h2 class="text-center mb-4">使用者登入</h2>
+      <div id="login-msg" class="alert d-none"></div>
+
+      <form id="login-form" novalidate>
+        <label for="login-email" class="form-label">電子郵件</label>
+        <input id="login-email" type="email" class="form-control mb-3">
+
+        <label for="login-password" class="form-label">密碼</label>
+        <input id="login-password" type="password" class="form-control mb-3">
+
+        <button type="submit" class="btn btn-primary w-100">登入</button>
+      </form>
+
+      <p class="text-center mt-3 mb-0">
+        <a href="#" data-goto="register">還沒有帳號？前往註冊</a>
+      </p>
+    </section>
+
+    <!-- ========== 註冊 ========== -->
+    <section id="view-register" class="auth-card card card-body d-none">
+      <h2 class="text-center mb-4">使用者註冊</h2>
+      <div id="register-msg" class="alert d-none"></div>
+
+      <form id="register-form" novalidate>
+        <label for="reg-name" class="form-label">姓名</label>
+        <input id="reg-name" type="text" class="form-control mb-3">
+
+        <label for="reg-email" class="form-label">電子郵件</label>
+        <input id="reg-email" type="email" class="form-control mb-3">
+
+        <label for="reg-password" class="form-label">密碼</label>
+        <input id="reg-password" type="password" class="form-control mb-3">
+
+        <div class="form-label">身份</div>
+        <div class="form-check">
+          <input id="role-teacher" class="form-check-input" type="radio" name="role" value="teacher">
+          <label class="form-check-label" for="role-teacher">老師</label>
+        </div>
+        <div class="form-check mb-3">
+          <input id="role-student" class="form-check-input" type="radio" name="role" value="student">
+          <label class="form-check-label" for="role-student">學生</label>
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">註冊</button>
+      </form>
+
+      <p class="text-center mt-3 mb-0">
+        <a href="#" data-goto="login">已有帳號？返回登入</a>
+      </p>
+    </section>
+
+    <!-- ========== 老師首頁 ========== -->
+    <section id="view-teacher" class="d-none">
+      <h2 class="text-center mb-4">教師成績管理系統</h2>
+      <div id="teacher-msg" class="alert d-none"></div>
+
+      <h4>上傳成績表</h4>
+      <input id="score-file" type="file" class="form-control mb-4" accept=".xlsx,.xls">
+
+      <div id="teacher-report" class="d-none">
+
+        <h4>成績統計視覺化</h4>
+        <div class="row g-3 mb-4">
+          <div class="col-12 col-lg-8">
+            <div class="chart-box"><canvas id="bar-chart"></canvas></div>
+          </div>
+          <div class="col-12 col-lg-4">
+            <div class="chart-box"><canvas id="pie-chart"></canvas></div>
+          </div>
+        </div>
+
+        <h4>成績統計詳情</h4>
+        <div class="table-responsive mb-4">
+          <table class="table table-striped">
+            <thead>
+              <tr><th>科目</th><th>平均分</th><th>最高分</th><th>最低分</th><th>及格率</th></tr>
+            </thead>
+            <tbody id="stats-body"></tbody>
+          </table>
+        </div>
+
+        <div class="d-flex flex-wrap justify-content-between align-items-center mb-2 gap-2">
+          <h4 class="mb-0">學生成績列表</h4>
+          <input id="search-input" type="search" class="form-control search-box"
+                 placeholder="搜尋學號或姓名">
+        </div>
+        <div class="table-responsive student-table">
+          <table class="table table-striped">
+            <thead id="students-head"></thead>
+            <tbody id="students-body"></tbody>
+          </table>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ========== 學生首頁 ========== -->
+    <section id="view-student" class="student-card d-none">
+      <h2 class="text-center mb-4">學生成績查詢</h2>
+      <div id="student-msg" class="alert d-none"></div>
+
+      <div id="student-report" class="d-none">
+        <h5>學生信息</h5>
+        <p class="mb-1"><strong>學號：</strong><span id="student-id"></span></p>
+        <p><strong>姓名：</strong><span id="student-name"></span></p>
+
+        <h5>成績概況</h5>
+        <table class="table table-striped">
+          <thead><tr><th>科目</th><th>成績</th></tr></thead>
+          <tbody id="student-scores"></tbody>
+        </table>
+      </div>
+    </section>
+
+  </main>
+
+  <script src="lib/xlsx.full.min.js"></script>
+  <script src="lib/chart.umd.js"></script>
+  <script src="team001.js"></script>
+</body>
+</html>

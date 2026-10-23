@@ -1,0 +1,68 @@
+<!--
+  event_filter：可重複使用的網頁元件（沒有 html / head / body 標籤）
+
+  使用方式：
+    1. 引用方頁面載入 jQuery、Bootstrap 與 event_filter.css
+    2. 引用方頁面放入 <script id="events-data" type="application/json"> 提供事件資料
+    3. 引用方以 jQuery 動態載入本檔案
+-->
+<div class="container event-filter">
+  <div class="row g-0">
+
+    <!-- 區塊一：設定查詢期間 -->
+    <div class="col-md-6 event-filter-range">
+      <p class="mb-2">選擇欲查詢事件的區間:</p>
+      <label for="ef-from">from:</label>
+      <input type="date" id="ef-from" value="2024-05-01">
+      <span>-</span>
+      <label for="ef-to">to:</label>
+      <input type="date" id="ef-to" value="2024-07-31">
+    </div>
+
+    <!-- 區塊二：期間內的事件列表 -->
+    <div class="col-md-6 event-filter-list">
+      <p class="mb-2">事件列表:</p>
+      <ul id="ef-list" class="list-unstyled mb-0"></ul>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  (function ($) {
+    const $from = $("#ef-from");
+    const $to = $("#ef-to");
+    const $list = $("#ef-list");
+
+    // 讀取引用方提供的 JSON 事件資料
+    let events;
+    try {
+      events = JSON.parse($("#events-data").text());
+    } catch (error) {
+      $list.append($("<li>").text("事件資料讀取失敗：" + error.message));
+      return;
+    }
+
+    // 依目前的起訖日期重新產生事件列表（日期遞增排序）
+    function render() {
+      const from = $from.val();
+      const to = $to.val();
+
+      const matched = events
+        .filter(function (event) {
+          return (!from || event.date >= from) && (!to || event.date <= to);
+        })
+        .sort(function (a, b) {
+          return a.date.localeCompare(b.date);
+        });
+
+      $list.empty();
+      matched.forEach(function (event) {
+        $list.append($("<li>").text(event.date + ": " + event.description));
+      });
+    }
+
+    $from.add($to).on("change", render);
+    render();
+  })(jQuery);
+</script>

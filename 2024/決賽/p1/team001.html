@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>重複使用 Web 元件</title>
+  <link rel="stylesheet" href="lib/bootstrap.min.css">
+  <link rel="stylesheet" href="event_filter.css">
+  <link rel="stylesheet" href="team001.css">
+</head>
+<body>
+
+  <div class="container demo-page">
+    <h2 class="demo-title">本網頁展示如何引用外部 HTML 檔案以達到重複使用 Web 元件的目標</h2>
+
+    <!-- event_filter 會被動態匯入到這裡 -->
+    <div id="filter-host"></div>
+  </div>
+
+  <!-- 事件資料（JSON 格式，故意不依日期排序） -->
+  <script id="events-data" type="application/json">
+  [
+    { "date": "2024-07-26", "description": "巴黎奧運會開幕" },
+    { "date": "2024-04-15", "description": "期中考" },
+    { "date": "2024-06-06", "description": "期末考" },
+    { "date": "2024-08-15", "description": "暑期實習開始" },
+    { "date": "2024-05-28", "description": "project 總結展示結束" },
+    { "date": "2024-03-20", "description": "專題提案" },
+    { "date": "2024-06-28", "description": "南極避暑" },
+    { "date": "2024-09-02", "description": "新學期開學" },
+    { "date": "2024-01-01", "description": "元旦" },
+    { "date": "2024-10-10", "description": "國慶日" },
+    { "date": "2024-12-25", "description": "聖誕節" }
+  ]
+  </script>
+
+  <script src="lib/jquery.min.js"></script>
+  <script>
+    $(function () {
+      const COMPONENT_URL = "event_filter.html";   // 故意寫錯路徑可測試錯誤訊息
+      const $host = $("#filter-host");
+
+      function showError(message) {
+        $host.empty().append($("<p>").addClass("import-error").text("遭遇問題: " + message));
+      }
+
+      $.ajax({ url: COMPONENT_URL, dataType: "html" })
+        .done(function (html) {
+          try {
+            $host.html(html);          // jQuery 會一併執行元件內的 <script>
+          } catch (error) {
+            showError(error.message);
+          }
+        })
+        .fail(function (xhr) {
+          const reason = xhr.statusText || (xhr.status === 404 ? "Not Found" : "");
+          showError((xhr.status + " " + reason).trim());
+        });
+    });
+  </script>
+</body>
+</html>

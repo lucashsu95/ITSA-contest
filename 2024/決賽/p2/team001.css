@@ -1,0 +1,55 @@
+body {
+  background-color: #f5f6f8;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+/* ---------- 頂端列 ---------- */
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 12px;
+  padding: 8px 16px;
+  background-color: #fff;
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* ---------- 登入 / 註冊卡片 ---------- */
+.auth-card {
+  max-width: 420px;
+  margin: 24px auto;
+}
+
+/* ---------- 學生首頁 ---------- */
+.student-card {
+  max-width: 640px;
+  margin: 0 auto;
+  padding: 16px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* ---------- 老師首頁 ---------- */
+.search-box {
+  max-width: 260px;
+}
+
+.chart-box {
+  position: relative;
+  min-height: 260px;
+  padding: 8px;
+  background-color: #fff;
+  border-radius: 8px;
+}
+
+/* 學生很多時，列表在固定高度內捲動 */
+.student-table {
+  max-height: 480px;
+  overflow-y: auto;
+}
+
+.student-table thead th {
+  position: sticky;
+  top: 0;
+  background-color: #fff;
+}
