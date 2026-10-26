@@ -136,20 +136,13 @@ A('<div class="two">' + box("XAMPP（PHP / MySQL）開賽前", [
     "Bootstrap / jQuery / Chart.js / SheetJS 全部放本機 `lib/`，**不能用 CDN**",
     "存檔 UTF-8；PHP 檔存成「無 BOM」",
 ]) + '</div>')
-A('<div class="two">' + box("繳交規則（每年都一樣）", [
-    "檔名 `team###.html` / `.php` / `.css` / `.js`（###＝隊別編號）；**檔名錯誤 = 0 分**",
-    "只能用**相對路徑**；連到 `../p1-ref/` 之類的外部路徑不計分",
-    "每題一個資料夾（p1-ans、p2-ans…），整包壓成 zip 上傳",
-    "每完成一項 → 截圖（一起放進該題資料夾）→ 在解題自評表勾選",
-    "題目指定的文字（placeholder、alert、預設資料）**逐字複製**，包含全形標點",
-    "同分時看題目順序（每年不同，看試卷第 1 頁）",
-]) + box("2 小時節奏（建議）", [
+A(box("2 小時節奏（建議）", [
     "0–5 分：全部題目讀完，圈出配分高且熟的項目",
     "先做「能拿分又不會卡住」的，一個功能做完立刻截圖",
     "每 30 分鐘用瀏覽器完整走一次流程（登入 → 操作 → 登出）",
     "最後 10 分鐘：檔名、相對路徑、截圖、自評表、zip，**不再加功能**",
     "卡住超過 10 分鐘 → 先跳下一項，回頭再解",
-]) + '</div>')
+]))
 
 # ================================================================ 1. Bootstrap breakpoints
 A(sec("1　Bootstrap 5 RWD 斷點（Breakpoints）", "#7952b3", "html"))
@@ -350,41 +343,124 @@ const rows = XLSX.utils.sheet_to_json(
 // 平均 toFixed(2)；及格率 = 及格人數 / 總人數 * 100
 '''),
 ))
-A(block("Chart.js（長條圖 / 圓餅圖 / 折線圖 / 更新與重畫）", r'''
-// 引入：<script src="lib/chart.umd.js"></script>                 （本機檔，不用 CDN）
-// 畫布：<div style="position:relative; height:300px"><canvas id="c1"></canvas></div>   ← 外層一定要有高度
+# ---------------------------------------------------------------- Chart.js（0 → 1）
+A(sub("2.1　Chart.js 從零開始（長條圖 / 圓餅圖）"))
+A(p("Chart.js 畫圖固定三步驟：**① 引入本機 js → ② HTML 放 `<canvas>`（外層要有高度）→ ③ `new Chart(canvas, 設定)`**。以下兩種圖的完整語法都可以直接背。"))
+A('<div class="two">' + block("步驟 ①＋②：HTML 側（引入、畫布）", lang="html", src=r'''
+<!-- ① chart.umd.js 放 lib/（本機檔，比賽不能用 CDN） -->
+<script src="lib/chart.umd.js"></script>
 
-let chart;                                        // 重畫前先 destroy，否則舊圖會疊在上面
-function draw(labels, avg, max, min) {
-  if (chart) chart.destroy();
-  chart = new Chart(document.getElementById('c1'), {
-    type: 'bar',                                  // 'bar' 'line' 'pie' 'doughnut' 'radar' 'polarArea'
-    data: {
-      labels,                                     // X 軸刻度；圓餅圖是每一片的名稱
-      datasets: [
-        { label: '平均分', data: avg, backgroundColor: 'rgba(75,192,192,.6)' },
-        { label: '最高分', data: max, backgroundColor: 'rgba(255,99,132,.6)' },
-        { label: '最低分', data: min, backgroundColor: 'rgba(255,205,86,.6)' },
-      ],
+<!-- ② canvas 外層一定要「有高度」，否則圖不顯示 -->
+<div style="position:relative; height:300px">
+  <canvas id="c1"></canvas>          <!-- 長條圖用 c1 -->
+</div>
+<div style="position:relative; height:300px">
+  <canvas id="c2"></canvas>          <!-- 圓餅圖用 c2 -->
+</div>
+''') + block("長條圖（bar）最小完整例", lang="js", src=r'''
+new Chart(document.getElementById('c1'), {
+  type: 'bar',                          // 'bar' 長條圖
+  data: {
+    labels: ['數學', '英語', '國文'],   // x 軸刻度名稱
+    datasets: [{                        // 一組 dataset ＝ 一排長條
+      label: '成績',                    // 顯示在 legend（圖例）
+      data: [88, 76, 91],               // 每根的數值
+      backgroundColor: 'rgba(54,162,235,.6)',   // 長條填色
+      borderColor: 'rgba(54,162,235,1)',        // 長條邊框
+      borderWidth: 1,
+      borderRadius: 6,                  // 長條頂端圓角
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,         // 填滿外層 300px（RWD 才正常）
+    plugins: {
+      title: { display: true, text: '各科成績' },
+      legend: { display: true, position: 'top' },   // 'bottom' 'left' 'right'
     },
-    options: {
-      responsive: true,
-      maintainAspectRatio: false,                 // 填滿外層容器的高度（RWD 才會正常）
-      plugins: {
-        title:  { display: true, text: '各科成績統計' },
-        legend: { position: 'top' },              // 'bottom' 'left' 'right'
+    scales: {
+      y: { beginAtZero: true, max: 100 },  // y 軸 0～100
+    },
+  },
+});
+''') + '</div>')
+A(block("長條圖：多組 dataset（並排 / 堆疊）", r'''
+data: {
+  labels: ['一組', '二組', '三組'],
+  datasets: [
+    { label: '本學期', data: [88, 76, 91], backgroundColor: 'rgba(54,162,235,.6)' },
+    { label: '上學期', data: [79, 81, 84], backgroundColor: 'rgba(255,159,28,.6)' },
+  ],
+},
+// → 每格並排兩根長條；legend 顯示「本學期／上學期」
+// 改成堆疊（同一格疊在一起）：
+options: {
+  scales: { x: { stacked: true }, y: { stacked: true } },
+}
+'''))
+A(block("圓餅圖（pie / doughnut）最小完整例", r'''
+new Chart(document.getElementById('c2'), {
+  type: 'pie',                          // 'pie' 圓餅；'doughnut' 甜甜圈（中間挖洞）
+  data: {
+    labels: ['Windows', 'macOS', 'Linux'],   // 每一片的名稱（顯示在 legend）
+    datasets: [{                        // 圓餅圖只放「一組」dataset
+      label: 'OS 佔比',
+      data: [62, 30, 8],                // 每片佔比（自動算角度，不用加總 100）
+      backgroundColor: ['#36a2eb', '#ff9944', '#4bc0c0'],   // 一片一個顏色，順序對應 labels
+      // cutout: '55%',                 // 只給 doughnut 用：中洞大小（寫在 dataset 內，pie 不用寫）
+    }],
+  },
+  options: {
+    responsive: true,
+    maintainAspectRatio: false,
+    plugins: {
+      title: { display: true, text: 'OS 佔比' },
+      legend: { position: 'bottom' },
+      tooltip: {
+        callbacks: {
+          // 游標移上去的顯示（預設是「Windows: 62」）
+          label: (ctx) => ' ' + ctx.label + '：' + ctx.parsed + '%',
+        },
       },
-      scales: { y: { min: 0, max: 100 } },        // 圓餅圖不要寫 scales
     },
+    // 注意：圓餅圖「不要寫 scales」（沒有座標軸）
+  },
+});
+'''))
+A('<div class="two">' + table(["比較","長條圖 `bar`","圓餅圖 `pie`"], [
+    ["用途","比較「大小 / 數值」","比較「佔比」"],
+    ["datasets","可多組（並排 / 堆疊）","只放一組"],
+    ["scales","要（`y: { min:0, max:100 }`）","**不要寫**"],
+    ["labels","x 軸刻度","每一片的名稱"],
+    ["背景色","一組一個顏色","**一片一個顏色**（陣列，順序對應）"],
+    ["tooltip 數值","游標移上去自帶","`ctx.parsed` 就是該片的數值"],
+], "w") + block("更新資料與重畫（最常考）", r'''
+let chart;                       // 記得存住實例
+
+function render(labels, data) {
+  if (chart) chart.destroy();    // 重畫前一定 destroy，否則舊圖疊在上面
+  chart = new Chart(document.getElementById('c1'), {
+    type: 'bar',
+    data: { labels, datasets: [{ data }] },
+    options: { responsive: true, maintainAspectRatio: false },
   });
 }
 
-// 圓餅圖：type: 'pie'；datasets 只放一組：{ data: [90, 80, 70], backgroundColor: ['#f2738b', '#54a6e8', '#f9ce5d'] }
-// 折線圖：type: 'line'；dataset 加  borderColor: '#36a2eb', tension: 0.3, fill: false
-// 堆疊長條：options.scales = { x: { stacked: true }, y: { stacked: true } }
-// 只更新資料：chart.data.datasets[0].data = [...]; chart.update();        // 不需要 destroy
-// 圖上常駐顯示數字：要另外的 chartjs-plugin-datalabels；沒有的話改用表格顯示
-'''))
+// 同一張圖只換數字（型別不變）：不用 destroy
+chart.data.labels = ['數學', '英語', '國文'];
+chart.data.datasets[0].data = [90, 85, 77];
+chart.update();                  // 平滑過渡到新數值
+// 換圖型（bar → pie）或換 dataset 結構 → 還是 destroy 再 new
+''') + '</div>')
+A(box("Chart.js 常踩的坑", [
+    "外層沒有高度（`height:300px`）→ 圖是 0 高度，看不到；`maintainAspectRatio: false` 才會填滿容器",
+    "重畫前忘了 `chart.destroy()` → 兩張圖疊在一起、資料重複",
+    "圓餅圖寫了 `scales` 或放了多組 dataset → 不畫 / 報錯",
+    "忘了引入本機 `lib/chart.umd.js`，或路徑打錯 → 直接 `Chart is not defined`",
+    "數字是字串（表單拿到的值）→ 先 `Number(x)`，長條圖會不出來",
+    "圖上常駐顯示數字要另裝 `chartjs-plugin-datalabels`；沒有就改用表格顯示數字",
+    "其他圖型：折線圖 `type:'line'`（dataset 加 `borderColor: '#36a2eb', tension: 0.3, fill: false`）、雷達圖 `'radar'`、極座標 `'polarArea'`",
+]))
 
 # ================================================================ 3. PHP
 A(sec("3　PHP 後端模板（XAMPP）", "#4f5b93", "php"))
