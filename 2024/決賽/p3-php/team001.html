@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <!-- BASE -->
+  <title>便利商店智慧問答客服</title>
+  <link rel="stylesheet" href="team001.css">
+</head>
+<!-- data-page 由 team001.php 依網址（/、/login、/admin）填入，JS 只顯示對應的畫面 -->
+<body data-page="chat">
+
+  <!-- ========== /login 管理員登入 ========== -->
+  <main class="panel" data-view="login" hidden>
+    <h1>管理員登入</h1>
+
+    <form id="login-form" class="login-form">
+      <label for="username">帳號</label>
+      <input id="username" class="pill" type="text" autocomplete="username" required>
+
+      <label for="password">密碼</label>
+      <input id="password" class="pill" type="password" autocomplete="current-password" required>
+
+      <button type="submit" class="pill">登入</button>
+    </form>
+  </main>
+
+  <!-- ========== /admin 問答管理系統 ========== -->
+  <main class="panel" data-view="admin" hidden>
+    <h1>問答管理系統</h1>
+
+    <input id="question" class="pill" type="text" placeholder="問題">
+    <input id="answer" class="pill" type="text" placeholder="答案">
+
+    <!-- 新增模式 -->
+    <button id="add-btn" class="pill" type="button">新增</button>
+
+    <!-- 編輯模式 -->
+    <div id="edit-actions" class="edit-actions" hidden>
+      <button id="update-btn" class="pill" type="button">更新</button>
+      <button id="cancel-btn" class="pill" type="button">取消</button>
+    </div>
+
+    <div id="faq-list"></div>
+  </main>
+
+  <!-- ========== / 問答對話頁 ========== -->
+  <main class="panel" data-view="chat" hidden>
+    <h1>便利商店智慧問答客服</h1>
+
+    <div id="chat-log" class="chat-log"></div>
+
+    <form id="chat-form" class="chat-form" autocomplete="off">
+      <input id="chat-input" type="text" placeholder="請輸入您的問題...">
+      <button type="submit">傳送</button>
+    </form>
+  </main>
+
+  <script src="team001.js"></script>
+</body>
+</html>

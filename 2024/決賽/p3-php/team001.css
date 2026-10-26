@@ -1,0 +1,164 @@
+/* ---------- 共用 ---------- */
+:root {
+  --blue: #0d6efd;
+  --border: #d5d9de;
+  --bot-bg: #f8d7da;
+  --bot-text: #842029;
+  --user-bg: #cfe8dc;
+  --user-text: #0f5132;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+body {
+  margin: 0;
+  background-color: #eceff1;
+  font-family: "Noto Sans TC", "Microsoft JhengHei", sans-serif;
+}
+
+.panel {
+  width: min(92%, 560px);
+  margin: 32px auto;
+  padding: 24px;
+  background-color: #f7f7f7;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.12);
+}
+
+.panel h1 {
+  margin: 0 0 20px;
+  text-align: center;
+  font-size: 1.6rem;
+}
+
+/* 圓角輸入框與按鈕 */
+.pill {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 10px 16px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  font-size: 1rem;
+}
+
+button.pill {
+  border: none;
+  background-color: var(--blue);
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ---------- 登入頁 ---------- */
+.login-form label {
+  display: block;
+  margin-bottom: 6px;
+  text-align: center;
+  color: #555;
+}
+
+/* ---------- 管理頁 ---------- */
+.edit-actions {
+  display: flex;
+  gap: 16px;
+}
+
+.edit-actions .pill {
+  margin-bottom: 12px;
+}
+
+.faq-card {
+  margin-top: 12px;
+  padding: 10px 14px;
+  background-color: #fff;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.faq-card h3 {
+  margin: 0 0 4px;
+  font-size: 1rem;
+}
+
+.faq-card p {
+  margin: 0 0 8px;
+}
+
+.faq-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 8px;
+}
+
+.faq-actions button {
+  padding: 6px 18px;
+  border: none;
+  border-radius: 999px;
+  background-color: var(--blue);
+  color: #fff;
+  cursor: pointer;
+}
+
+/* ---------- 對話頁 ---------- */
+.chat-log {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  height: 60vh;
+  min-height: 280px;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #fff;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+}
+
+.msg {
+  max-width: 80%;
+  padding: 6px 12px;
+  border-radius: 12px;
+  word-break: break-word;
+}
+
+.msg.bot {
+  align-self: flex-start;
+  background-color: var(--bot-bg);
+  color: var(--bot-text);
+}
+
+.msg.user {
+  align-self: flex-end;
+  background-color: var(--user-bg);
+  color: var(--user-text);
+}
+
+.chat-form {
+  display: flex;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.chat-form input {
+  flex: 1;
+  min-width: 0;
+  padding: 8px 10px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-size: 1rem;
+}
+
+.chat-form button {
+  padding: 8px 20px;
+  border: none;
+  border-radius: 6px;
+  background-color: var(--blue);
+  color: #fff;
+  cursor: pointer;
+}

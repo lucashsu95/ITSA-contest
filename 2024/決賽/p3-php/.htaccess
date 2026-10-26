@@ -1,0 +1,5 @@
+# XAMPP（Apache）：首頁、/login、/admin 都由 team001.php 處理
+DirectoryIndex team001.php
+
+RewriteEngine On
+RewriteRule ^(login|admin)/?$ team001.php [L]
